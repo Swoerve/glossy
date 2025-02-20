@@ -1,0 +1,17 @@
+<script setup>
+import { ref } from "vue"
+import { useRoute } from "vue-router"
+
+const router = useRoute();
+</script>
+
+
+<template>
+    <main>
+        <img src="glossy.png" alt="logo">
+      <button>Logga in</button>
+      <button>Registrera dig</button>
+      <router-link to "/">Tillbaka</router-link>
+
+    </main>
+  </template>
