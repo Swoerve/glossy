@@ -8,7 +8,7 @@ const router = useRouter();
 
 <template>
     <main>
-        <img src="glossy.png" alt="logo">
+        <img src="../assets/glossy.png" alt="logo">
       <button href="">Logga in som elev</button>
       <button href="">Logga in som lärare</button>
 
