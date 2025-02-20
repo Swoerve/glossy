@@ -1,19 +1,20 @@
 <script setup>
 import { ref } from "vue"
-import { useRoute } from "vue-router"
-import { RouterLink, RouterView } from "vue-router"
+import { useRouter } from "vue-router"
 
-
-const router = useRoute();
+const router = useRouter();
 </script>
 
 
 <template>
     <main>
         <img src="../assets/glossy.png" alt="logo">
-      <button>Logga in</button>
-      <button>Registrera dig</button>
-      <router-link to="">Tillbaka</router-link>
+      <button href="">Logga in som elev</button>
+      <button href="">Logga in som lärare</button>
 
     </main>
   </template>
+
+<style scoped>
+
+</style>
