@@ -10,7 +10,7 @@ const router = useRouter();
     <main>
         <img src="../assets/glossy.png" alt="logo">
       <button href="">Logga in som elev</button>
-      <button href="">Logga in som lärare</button>
+      <button href="../views/AccountTeacherView.vue">Logga in som lärare</button>
 
     </main>
   </template>
