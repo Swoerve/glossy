@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import LoginView from './LoginView.vue';
+
 
 </script>
 
@@ -10,5 +10,9 @@ import LoginView from './LoginView.vue';
     <router-link to="/login">
       <button>Logga in</button>
     </router-link>
+    <router-link to = "/signupview">
+      <button>Registrera dig</button>
+    </router-link>
+    
   </div>
 </template>
