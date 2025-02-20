@@ -4,7 +4,6 @@ import { useRouter } from "vue-router"
 </script>
 
 <template>
-    <img src="Glossy\glossy\src\assets\glossy.png" alt="">
     <div id="signup">
         <p>Namn: {{ email }}</p>
         <input v-model="email" placeholder="Skriv in din skolmail här!">
