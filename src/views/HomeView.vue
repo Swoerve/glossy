@@ -1,7 +1,14 @@
+<script setup lang="ts">
+import LoginView from './LoginView.vue';
+
+</script>
+
 
 <template>
-  <main>
-    <button>Logga in</button>
-    <button>Registrera dig</button>
-  </main>
+  <div>
+    <h1>Välkommen!</h1>
+    <router-link to="/login">
+      <button>Logga in</button>
+    </router-link>
+  </div>
 </template>
