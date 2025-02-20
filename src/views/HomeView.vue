@@ -1,9 +1,9 @@
-<script setup>
+<!-- <script setup>
 import TheWelcome from '../components/TheWelcome.vue'
-</script>
+</script> -->
 
 <template>
   <main>
-    <TheWelcome />
+    <h1>Hejsan</h1>
   </main>
 </template>
