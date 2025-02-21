@@ -1,6 +1,26 @@
 <script setup> 
 import { ref } from "vue"
 import { useRouter } from "vue-router"
+
+const router = useRouter()
+
+const role = ref(null)
+const classCode = ref(null)
+const email = ref(null)
+const password = ref(null)
+const checked = ref(null)
+
+
+function register(){
+  if(role.value === "Teacher"){
+      router.push("/accountteacherview")
+  }
+
+  else if(role.value === "Student"){
+    router.push("/accountstudentview")
+  }
+
+}
 </script>
 
 <template>
@@ -8,7 +28,7 @@ import { useRouter } from "vue-router"
         <img src="../assets/glossy.png" alt="logo" class="logo">
     </div>
     <div class="signup-container">
-            <div id="signup">
+      <div id="signup">
         <h1 id="header">Registrera dig</h1>
         <p>E-mail: {{ email }}</p>
         <input v-model="email" placeholder="Skriv in din skolmail här"><br>
@@ -16,17 +36,18 @@ import { useRouter } from "vue-router"
         <input v-model="password" placeholder="Ge aldrig ut ditt lösenord"><br>
         <p>Välj din roll:</p>
         <select v-model="role">
-            <option>Lärare</option>
-            <option>Elev</option>
+            <option value="Teacher">Lärare</option>
+            <option value="Student">Elev</option>
         </select><br>
-        <p>Klasskod: {{ classCode }}</p>
-        <input v-model="classCode" placeholder="Skriv in din klasskod här"><br>
+
+        <p v-if="role === 'Student'">Klasskod: {{ classCode }}</p>
+        <input v-if="role === 'Student' " v-model="classCode" placeholder="Skriv in din klasskod här"><br>
         <p>Jag accepterar villkoren✅</p>
         <a href="https://www.google.se/?hl=sv">Villkor</a>
         <input type="checkbox" id="terms" v-model="checked" />
         <label for="terms"> {{ checked }}</label>
-        <button id="signup-button">Registrera dig</button>
-    </div>
+        <button @click="register" id="signup-button">Registrera dig</button>
+      </div>
     </div>
 </template>
 
