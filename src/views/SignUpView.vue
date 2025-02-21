@@ -31,17 +31,17 @@ function register(){
       <div id="signup">
         <h1 id="header">Registrera dig</h1>
         <p>E-mail: {{ email }}</p>
-        <input v-model="email" placeholder="Skriv in din skolmail här"><br>
+        <input v-model="email" placeholder="Skriv in din skolmail här" class="signup-input"><br>
         <p>Lösenord: {{ password }}</p>
-        <input v-model="password" placeholder="Ge aldrig ut ditt lösenord"><br>
+        <input v-model="password" placeholder="Ge aldrig ut ditt lösenord" class="signup-input"><br>
         <p>Välj din roll:</p>
-        <select v-model="role">
+        <select v-model="role" class="signup-input">
             <option value="Teacher">Lärare</option>
             <option value="Student">Elev</option>
         </select><br>
 
         <p v-if="role === 'Student'">Klasskod: {{ classCode }}</p>
-        <input v-if="role === 'Student' " v-model="classCode" placeholder="Skriv in din klasskod här"><br>
+        <input v-if="role === 'Student' " v-model="classCode" placeholder="Skriv in din klasskod här" class="signup-input"><br>
         <p>Jag accepterar villkoren✅</p>
         <a href="https://www.google.se/?hl=sv">Villkor</a>
         <input type="checkbox" id="terms" v-model="checked" />
@@ -56,7 +56,9 @@ function register(){
 
 <style scoped>
 
-
+#header {
+    color: black;
+}
 
 .logo-container {
   display: flex;
@@ -75,6 +77,7 @@ function register(){
   align-items: center;
   min-height: 100vh;
   width: 100%;
+  color:black;
 }
 
 #signup {
@@ -85,6 +88,13 @@ function register(){
   border: 0.5px solid #9667e0;
   border-radius: 8px;
   box-shadow: 0 0 10px rgba(0,0,0,0.1);
+  background-color: #f2ebfb;
+}
+
+.signup-input {
+    text-align: left;
+    background-color: white;
+    border: 0.5px solid #9667e0;
 }
 
 #terms {
