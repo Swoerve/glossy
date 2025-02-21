@@ -19,8 +19,8 @@ import { useRouter } from "vue-router"
             <option>Lärare</option>
             <option>Elev</option>
         </select><br>
-        <p>Kurskod: {{ courseCode }}</p>
-        <input v-model="courseCode" placeholder="Skriv in din kurskod här"><br>
+        <p>Klasskod: {{ classCode }}</p>
+        <input v-model="classCode" placeholder="Skriv in din klasskod här"><br>
         <p>Jag accepterar villkoren✅</p>
         <a href="https://www.google.se/?hl=sv">Villkor</a>
         <input type="checkbox" id="terms" v-model="checked" />
