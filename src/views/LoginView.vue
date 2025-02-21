@@ -28,10 +28,11 @@ const router = useRouter();
 .logo-container {
   display: flex;
   justify-content: center;
+  margin-left: 20px;
 }
 
 .logo {
-  width: 300px;
+  width: 500px;
   height: auto;
 }
 
@@ -42,7 +43,7 @@ main {
 }
 
 .login-button {
-  margin-top: 5px;
+  margin-top: 10px;
   width: 170px;
   border-radius: 4px;
   color:white;
@@ -50,6 +51,7 @@ main {
 }
 
 .login-student-button {
+  margin-top: 200px;
   background-color: #D4BBFC;
   border: 0.5px solid #9667e0;
 }
