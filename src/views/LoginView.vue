@@ -20,6 +20,10 @@ const router = useRouter();
       <router-link to="/accountteacherview">
         <button class="login-button login-teacher-button">Logga in som lärare</button>
       </router-link>
+      
+      <router-link to="/">
+        <button class="back">Tillbaka</button>
+      </router-link>
 
     </main>
   </template>
@@ -59,5 +63,11 @@ main {
 .login-teacher-button {
   background-color: #9667e0;
   border: 0.5px solid #d4bbfc
+}
+
+.back{
+  border-radius: 4px;
+  margin-top: 10px;
+  background-color: #f2ebfb;
 }
 </style>
