@@ -21,6 +21,11 @@
 
 
 <style>
+
+body {
+  background-image: url(../assets/wallpaper.png);
+}
+
 .homepage{
   display: flex;
   flex-direction: column;
