@@ -1,8 +1,10 @@
 <script setup> 
   import{ref}from "vue"
   import CreateCourse from "@/components/CreateCourse.vue"
+import Settings from "@/components/settings.vue";
  
   const showModal = ref(false)
+  const showSettings = ref(false)
   
 </script>
 
@@ -13,17 +15,24 @@
 
   <div id="idk">
   <h1 id="h1">Välkommen lärare</h1>
-  <div>
+
+  <div> <!--Detta gör att en liten ruta med ett input fålt dyker upp-->
     <button @click="showModal = true" class="account-button">Skapa en ny kurs</button>
     <CreateCourse :isOpen="showModal" @close="showModal = false"></CreateCourse>
   </div>
-  <div>
+
+  <div> <!--Detta tar en till en ny sida där man kan skapa ett quiz-->
     <router-link to = "/createquizview">
     <button class="account-button">Skapa quiz</button>
     </router-link>
   </div>
   <button class="account-button">Statistik</button>
-  <button class="account-button">Inställningar</button>
+
+
+  <div> <!-- Detta gör att en settings ruta dyker upp-->
+    <button @click="showSettings = true" class="account-button">Inställningar</button>
+    <Settings :isOpen="showSettings" @close="showSettings = false"></Settings>
+  </div>
 </div>
 </template>
 

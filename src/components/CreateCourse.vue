@@ -27,7 +27,6 @@
         </form>
       </section>
       <button class="close-btn" @click="closeModal">Stäng ner</button>
-      <slot></slot>
     </div>
   </div>
 </template>
@@ -47,8 +46,8 @@
 
 .modal-content {
   background: white;
-  padding: 20px;
-  border-radius: 8px;
+  padding: 100px;
+  border-radius: 3px;
   min-width: 300px;
   position: relative;
 }
