@@ -9,12 +9,15 @@ const router = useRouter();
 
 <template>
     <main>
-        <img src="../assets/glossy.png" alt="logo">
-      <button href="">Logga in som elev</button>
+      <img src="../assets/glossy.png" alt="logo">
+
+      <router-link  to="/accountstudentview">
+        <button>Logga in som elev</button>
+      </router-link>
+
       <router-link to="/accountteacherview">
         <button>Logga in som lärare</button>
       </router-link>
-      
 
     </main>
   </template>
