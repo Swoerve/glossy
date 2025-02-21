@@ -12,10 +12,15 @@
   </div>
 
   <div id="idk">
-  <h1>Välkommen lärare</h1>
+  <h1 id="h1">Välkommen lärare</h1>
   <div>
     <button @click="showModal = true" class="account-button">Skapa en ny kurs</button>
     <CreateCourse :isOpen="showModal" @close="showModal = false"></CreateCourse>
+  </div>
+  <div>
+    <router-link to = "/createquizview">
+    <button class="account-button">Skapa quiz</button>
+    </router-link>
   </div>
   <button class="account-button">Statistik</button>
   <button class="account-button">Inställningar</button>
@@ -27,12 +32,16 @@
 .logo-container {
   display: flex;
   justify-content: center;
-  margin-left: 20px;
+  margin-left: 30px;
 }
 
 .logo {
   width: 500px;
   height: auto;
+}
+
+#h1 {
+  color: white;
 }
 
 #idk {
