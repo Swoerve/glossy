@@ -47,6 +47,9 @@ function register(){
         <input type="checkbox" id="terms" v-model="checked" />
         <label for="terms"> {{ checked }}</label>
         <button @click="register" id="signup-button">Registrera dig</button>
+        <router-link to="/">
+        <button class="back">Tillbaka</button>
+      </router-link>
       </div>
     </div>
 </template>
@@ -96,6 +99,13 @@ function register(){
     border: 0.5px solid #D4BBFC;
     border-radius: 4px;
     margin-top: 10px;
+}
+
+.back{
+  border-radius: 4px;
+  margin-top: 10px;
+  background-color: #f2ebfb;
+  margin-left: 170px;
 }
 
 </style>
