@@ -5,6 +5,7 @@ import AccountTeacherView from '@/views/AccountTeacherView.vue'
 import SignUpView from '@/views/SignUpView.vue'
 import AccountStudentView from '@/views/AccountStudentView.vue'
 
+
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes: [
