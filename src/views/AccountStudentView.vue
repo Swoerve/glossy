@@ -1,6 +1,6 @@
 <script setup>
   import{ref} from "vue"
-  import Settings from "@/components/settings.vue"
+  import Settings from "@/components/Settings.vue"
   const showSettings = ref(null)
 
 </script>

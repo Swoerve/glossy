@@ -1,7 +1,7 @@
 <script setup> 
   import{ref}from "vue"
   import CreateCourse from "@/components/CreateCourse.vue"
-import Settings from "@/components/settings.vue";
+import Settings from "@/components/Settings.vue";
  
   const showModal = ref(false)
   const showSettings = ref(false)
