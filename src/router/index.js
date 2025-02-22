@@ -5,6 +5,7 @@ import AccountTeacherView from '@/views/AccountTeacherView.vue'
 import SignUpView from '@/views/SignUpView.vue'
 import AccountStudentView from '@/views/AccountStudentView.vue'
 import CreateQuizView from '@/views/CreateQuizView.vue'
+import QuizView from '@/views/QuizView.vue'
 
 
 const router = createRouter({
@@ -45,6 +46,11 @@ const router = createRouter({
       path: '/createquizview',
       name: 'createquizview',
       component: CreateQuizView
+    },
+    {
+      path: '/accountstudentview/quizview',
+      name: 'quizview',
+      component: QuizView
     }
   ],
 })

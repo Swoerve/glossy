@@ -6,7 +6,7 @@
 </script>
 
 <template>
-  <button>Gå till quiz</button>
+  <Router-Link to="accountstudentview/quizview"> Gå till quiz </Router-Link>
   <button>Profil</button>
 
   <div> <!-- Detta gör att en settings ruta dyker upp-->
