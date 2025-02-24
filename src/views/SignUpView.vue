@@ -8,17 +8,23 @@ const role = ref(null)
 const classCode = ref(null)
 const email = ref(null)
 const password = ref(null)
-const checked = ref(null)
+const checked = ref(false)
 
 
+//Kollar så att alla fält är ifyllda och checkar om värdet från select element är lärare eller elev
 function register(){
-  if(role.value === "Teacher"){
-      router.push("/accountteacherview")
+  if(email.value && password.value && role.value && checked.value){
+    if(role.value === "Teacher"){
+        router.push("/accountteacherview") //Gör att knappen skickar dig till lärarvyn
+    }
+    else if(role.value === "Student"){
+      router.push("/accountstudentview")// Gör att knappen skickar användren till elevvyn
+    }
+  }
+  else{
+    alert("Fyll i alla fält och acceptera villkoren")
   }
 
-  else if(role.value === "Student"){
-    router.push("/accountstudentview")
-  }
 
 }
 </script>
