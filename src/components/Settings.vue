@@ -22,8 +22,8 @@ function changeVolume(){
 </script>
 
 <template>
-  <h2>Inställningar!</h2>
   <div v-if="isOpen" class="settings-container">
+    <h2>Inställningar!</h2>
     <div class="settings-content" @click.stop>
       <section>
         <div>
