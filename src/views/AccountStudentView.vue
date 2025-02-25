@@ -15,21 +15,28 @@
       <button>Profil</button>
     </router-link>
   
-  
-  
     <div> <!-- Detta gör att en settings ruta dyker upp-->
       <button @click="showSettings = true" class="account-button">Inställningar</button>
       <Settings :isOpen="showSettings" @close="showSettings = false"></Settings>
     </div>
   </nav>
 
+  <h1>Välkommen elev!</h1>
+
+  <section>
+    <h2>Kurser</h2>
+
+  </section>
+  
+
 
 </template> 
 
 <style scoped>
 
-  #navbar{
+#navbar{
   display: flex;
-  }
+  justify-content:space-evenly; 
+}
 
 </style>
