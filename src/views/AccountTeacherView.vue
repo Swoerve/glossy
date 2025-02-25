@@ -16,10 +16,16 @@ import Settings from "@/components/Settings.vue";
   <div id="idk">
   <h1 id="h1">Välkommen lärare</h1>
 
-  <div> <!--Detta gör att en liten ruta med ett input fålt dyker upp-->
+  <div>
+    <router-link to="/createcourseview">
+      <button class="account-button">Kurser</button>
+    </router-link>
+  </div>
+
+  <!-- <div> Detta gör att en liten ruta med ett input fålt dyker upp
     <button @click="showModal = true" class="account-button">Skapa en ny kurs</button>
     <CreateCourse :isOpen="showModal" @close="showModal = false"></CreateCourse>
-  </div>
+  </div> -->
 
   <div> <!--Detta tar en till en ny sida där man kan skapa ett quiz-->
     <router-link to = "/createquizview">
