@@ -1,7 +1,7 @@
 <script setup>
   import { defineEmits } from 'vue'
   import { defineProps } from 'vue'
-  import {ref} from 'vue'
+  import {ref, watch} from 'vue'
 
   const emit = defineEmits(["close"])
   const closeModal = () =>{
@@ -12,7 +12,13 @@
     isOpen: Boolean,
   })
 
-  const course = ref([])
+  const course = ref(null)
+
+  function createCourse(event){
+    event.preventDefault()
+    localStorage.setItem("course", course.value)
+    alert(`Kursen "${course.value}" har sparats!`)
+  }
 
 
 </script>
@@ -21,12 +27,13 @@
   <div v-if="isOpen" class="modal-overlay">
     <div class="modal-content" @click.stop>  <!-- stoppar alla clicks i modal från att stänga ner den -->
       <section>
-        <form>
+        <form @submit="createCourse">
           <label for="coursename"></label>
           <input id="#coursename" v-model="course">
+          <button type="submit">Skapa kurs</button>
         </form>
       </section>
-      <button class="close-btn" @click="closeModal">Stäng ner</button>
+      <button class="close-btn">Stäng ner</button>
     </div>
   </div>
 </template>
