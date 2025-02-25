@@ -6,12 +6,30 @@
 </script>
 
 <template>
-  <Router-Link to="accountstudentview/quizview"> Gå till quiz </Router-Link>
-  <button>Profil</button>
+  <nav id="navbar">
+    <router-link to="accountstudentview/quizview">
+      <button>Gå till quiz</button>  
+    </router-link>
+  
+    <router-link to="/studentprofileview">
+      <button>Profil</button>
+    </router-link>
+  
+  
+  
+    <div> <!-- Detta gör att en settings ruta dyker upp-->
+      <button @click="showSettings = true" class="account-button">Inställningar</button>
+      <Settings :isOpen="showSettings" @close="showSettings = false"></Settings>
+    </div>
+  </nav>
 
-  <div> <!-- Detta gör att en settings ruta dyker upp-->
-    <button @click="showSettings = true" class="account-button">Inställningar</button>
-    <Settings :isOpen="showSettings" @close="showSettings = false"></Settings>
-  </div>
 
-</template>
+</template> 
+
+<style scoped>
+
+  #navbar{
+  display: flex;
+  }
+
+</style>

@@ -16,7 +16,7 @@ import Settings from "@/components/Settings.vue";
   <div id="idk">
   <h1 id="h1">Välkommen lärare</h1>
 
-  <div>
+  <div><!--Tar dig kurs sidan-->
     <router-link to="/createcourseview">
       <button class="account-button">Kurser</button>
     </router-link>
