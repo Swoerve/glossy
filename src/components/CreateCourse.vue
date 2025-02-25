@@ -1,4 +1,4 @@
-<script setup>
+<!-- <script setup>
   import { defineEmits } from 'vue'
   import { defineProps } from 'vue'
   import {ref, watch} from 'vue'
@@ -21,11 +21,11 @@
   }
 
 
-</script>
+</script> -->
 
-<template>
+<!-- <template>
   <div v-if="isOpen" class="modal-overlay">
-    <div class="modal-content" @click.stop>  <!-- stoppar alla clicks i modal från att stänga ner den -->
+    <div class="modal-content" @click.stop> 
       <section>
         <form @submit="createCourse">
           <label for="coursename"></label>
@@ -69,4 +69,4 @@
   padding: 5px;
   cursor: pointer;
 }
- </style>
+ </style> -->
