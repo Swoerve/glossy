@@ -15,9 +15,14 @@ export function getLocalStorage(key) {
 }
 
 export function updateLocalStorage(key, object){
-  let currentStorage = getLocalStorage(key)
-  currentStorage.push(object)
-  setLocalStorage(key, currentStorage)
+  if(getLocalStorage(key)){
+    let currentStorage = getLocalStorage(key)
+    currentStorage.push(object)
+    setLocalStorage(key, currentStorage)
+  }else{
+    let temp = [object]
+    setLocalStorage(key, temp)
+  }
 }
 
 export function setSessionStorage(key, object) {
@@ -32,7 +37,12 @@ export function getSessionStorage(key) {
 }
 
 export function updateSessionStorage(key, object){
-  let currentStorage = getSessionStorage(key)
-  currentStorage.push(object)
-  setSessionStorage(key, currentStorage)
+  if(getSessionStorage(key)){
+    let currentStorage = getSessionStorage(key)
+    currentStorage.push(object)
+    setSessionStorage(key, currentStorage)
+  }else{
+    let temp = [object]
+    setSessionStorage(key, temp)
+  }
 }
