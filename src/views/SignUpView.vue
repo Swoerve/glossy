@@ -1,5 +1,5 @@
 <script setup> 
-import { setSessionStorage } from "@/storageHandler"
+import { setSessionStorage, updateLocalStorage } from "@/storageHandler"
 import { v4 } from "uuid"
 import { ref } from "vue"
 import { useRouter } from "vue-router"

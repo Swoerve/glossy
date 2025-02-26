@@ -1,14 +1,28 @@
 <script setup>
-  import{ref} from "vue"
-  import Settings from "@/components/Settings.vue"
-  const showSettings = ref(null)
+import{ref} from "vue"
+import Settings from "@/components/Settings.vue"
+import { getLocalStorage, getSessionStorage } from "@/storageHandler";
+const showSettings = ref(null)
+const student = ref(null)
+const courses = ref(null)
 
+if(getSessionStorage('loggedin')){
+  student.value = getSessionStorage('loggedin')
+}
+
+if(getLocalStorage('courses')){
+  let temp = getLocalStorage('courses')
+  let result = temp.filter((course) => {
+    return student.value.courses.includes(course.id)
+  })
+  courses.value = result
+}
 </script>
 
 <template>
   <nav id="navbar">
     <router-link to="accountstudentview/quizview">
-      <button>Gå till quiz</button>  
+      <button>Gå till quiz</button>
     </router-link>
   
     <router-link to="/studentprofileview">
@@ -21,22 +35,18 @@
     </div>
   </nav>
 
-  <h1>Hej {{name}}!</h1>
+  <h1>Hej {{student.name}}!</h1>
 
   <section id="course-section">
     <h2>Kurser</h2>
-    <div id="list-items">
-      <ul>
-        <!--Här ska alla kurser som eleven har läggas in-->
-
-        <!--Detta är bara tillfälliga kurser för att se hur det kommer att se ut-->
-        <li>Hejsan</li>
-        <li>Hej</li>
-        <li>h</li>
-        <li>5</li>
-        <li>yghu</li>
-      </ul>
-    </div>
+    <template v-if="courses">
+      <template v-for="course in courses">
+        <div><h1>{{ course.name }}</h1></div>
+      </template>
+    </template>
+    <template v-else>
+      <h1>You aren't part of any courses, ask your teacher for a course code</h1>
+    </template>
   </section>
 </template> 
 
@@ -83,6 +93,4 @@ li {
   text-align: center;
   min-width: 80px; /* Ensures a good size */
 }
-
-
 </style>
