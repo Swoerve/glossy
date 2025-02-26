@@ -11,6 +11,18 @@ const password = ref(null)
 const checked = ref(null)
 
 
+// Quiz object 
+const quiz = ref({
+  title: "",
+  difficulty: 1,
+  questions: [{
+    title: "",
+    answers: [],
+    correctAnswer: 0
+  }],
+  stars: 0
+})
+
 </script>
 
 <template>
@@ -18,12 +30,12 @@ const checked = ref(null)
       <div id="quiz">
         <h1 id="header">Skapa quiz</h1>
         <p class="quiztext">Titel</p>
-        <input v-model="titel" placeholder="Quiz 1 titel" class="quizbutton">
+        <input v-model="quiz.title" placeholder="Quiz 1 titel" class="quizbutton">
         <p class="quiztext">Svårighetsgrad:</p>
-        <select name="difficulty" id="difficulty" class="quizbutton">
-            <option value="easy">Enkel</option>
-            <option value="medium">Medel</option>
-            <option value="hard">Hård</option>
+        <select name="difficulty" id="difficulty" class="quizbutton" v-model="quiz.difficulty">
+            <option value="1">Enkel</option>
+            <option value="2">Medel</option>
+            <option value="3">Hård</option>
         </select>
         <p class="quiztext">Fråga 1 {{ question1 }}</p>
         <input v-model="question1" placeholder="Skriv fråga 1" class="quizbutton"   >
