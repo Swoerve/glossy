@@ -6,14 +6,31 @@ const router = useRouter()
 
 const role = ref('student')
 const classCode = ref(null)
-const email = ref(null)
+const email = ref("")
 const password = ref(null)
 const checked = ref(false)
 const name = ref(null)
 
+function isValidEmail(){
+  let regex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+  if(regex.test(email.value)){
+   return true
+  }
+  else{
+    return false
+  }
+}
+
+
+
 
 //Kollar så att alla fält är ifyllda och checkar om värdet från select element är lärare eller elev
 function register(){
+  if(!isValidEmail()){
+    // return "Vänligen ange en giltig email"
+    return null
+  }
+
   if(email.value && password.value && role.value && checked.value){
     if(role.value === "teacher"){
         router.push("/accountteacherview") //Gör att knappen skickar dig till lärarvyn
@@ -39,6 +56,7 @@ function register(){
         <h1 id="header">Registrera dig</h1>
         <p>E-mail: {{ email }}</p>
         <input v-model="email" placeholder="Skriv in din skolmail här" class="signup-input"><br>
+        <p v-show="!isValidEmail() && email.length > 0">hej</p>
         <p>Namn: {{ name }}</p>
         <input v-model="name" placeholder="John Doe" class="signup-input"><br>
         <p>Lösenord: {{ password }}</p>
