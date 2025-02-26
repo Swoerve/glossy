@@ -13,3 +13,14 @@ export function getLocalStorage(key) {
   let parsed = JSON.parse(item)
   return parsed
 }
+
+export function setSessionStorage(key, object) {
+  let stringified = JSON.stringify(object)
+  sessionStorage.setItem(key, stringified)
+}
+
+export function getSessionStorage(key) {
+  let item = sessionStorage.getItem(key)
+  let parsed = JSON.parse(item)
+  return parsed
+}
