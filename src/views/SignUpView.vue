@@ -1,4 +1,6 @@
 <script setup> 
+import { setSessionStorage } from "@/storageHandler"
+import { v4 } from "uuid"
 import { ref } from "vue"
 import { useRouter } from "vue-router"
 
@@ -24,18 +26,43 @@ function isValidEmail(){
 
 
 
+
 //Kollar så att alla fält är ifyllda och checkar om värdet från select element är lärare eller elev
 function register(){
+
   if(!isValidEmail()){
-    // return "Vänligen ange en giltig email"
     return null
   }
 
+  //Skapar ett objekt för användaren
+  let user = {
+    id:null, 
+    name:"",
+    email:"",
+    password:"",
+    courses:[]
+  }
+
+
   if(email.value && password.value && role.value && checked.value){
     if(role.value === "teacher"){
-        router.push("/accountteacherview") //Gör att knappen skickar dig till lärarvyn
+      user.id = v4
+      user.name = name.value
+      user.email = email.value
+      user.password = password.value
+      setSessionStorage("loggedin", user)//Kollar att användaren är inloggad
+      updateLocalStorage("teacher") //Lägger till konton i localStorage
+
+      router.push("/accountteacherview") //Gör att knappen skickar dig till lärarvyn
     }
     else if(role.value === "student"){
+      user.id = v4
+      user.name = name.value
+      user.email = email.value
+      user.password = password.value
+      setSessionStorage("loggedin", user)
+      updateLocalStorage("students", user)
+      
       router.push("/accountstudentview")// Gör att knappen skickar användren till elevvyn
     }
   }
