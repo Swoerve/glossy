@@ -28,6 +28,8 @@
     <div id="list-items">
       <ul>
         <!--Här ska alla kurser som eleven har läggas in-->
+
+        <!--Detta är bara tillfälliga kurser för att se hur det kommer att se ut-->
         <li>Hejsan</li>
         <li>Hej</li>
         <li>h</li>
@@ -48,7 +50,7 @@
 }
 
 #course-section{
-  background-color: aqua;
+  background-color: #df37e4;
   padding: 20px;
   border-radius: 5px;
  /* Adjust based on your layout */
@@ -57,7 +59,7 @@
 
 #list-items {
   display: flex;
-  background-color: beige;
+  background-color: #9931e4;
   flex-wrap: wrap; /* Ensures items wrap on smaller screens */
   justify-content: center;
   padding: 10px;
