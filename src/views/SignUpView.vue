@@ -4,7 +4,7 @@ import { useRouter } from "vue-router"
 
 const router = useRouter()
 
-const role = ref(null)
+const role = ref('student')
 const classCode = ref(null)
 const email = ref(null)
 const password = ref(null)
@@ -15,10 +15,10 @@ const name = ref(null)
 //Kollar så att alla fält är ifyllda och checkar om värdet från select element är lärare eller elev
 function register(){
   if(email.value && password.value && role.value && checked.value){
-    if(role.value === "Teacher"){
+    if(role.value === "teacher"){
         router.push("/accountteacherview") //Gör att knappen skickar dig till lärarvyn
     }
-    else if(role.value === "Student"){
+    else if(role.value === "student"){
       router.push("/accountstudentview")// Gör att knappen skickar användren till elevvyn
     }
   }
@@ -45,8 +45,8 @@ function register(){
         <input v-model="password" placeholder="Ge aldrig ut ditt lösenord" class="signup-input"><br>
         <p>Välj din roll:</p>
         <select v-model="role" class="signup-input">
-            <option value="Teacher">Lärare</option>
-            <option value="Student">Elev</option>
+            <option value="teacher">Lärare</option>
+            <option value="student">Elev</option>
         </select><br>
 
         <p v-if="role === 'Student'">Klasskod: {{ classCode }}</p>
