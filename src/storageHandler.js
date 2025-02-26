@@ -14,6 +14,12 @@ export function getLocalStorage(key) {
   return parsed
 }
 
+export function updateLocalStorage(key, object){
+  let currentStorage = getLocalStorage(key)
+  currentStorage.push(object)
+  setLocalStorage(key, currentStorage)
+}
+
 export function setSessionStorage(key, object) {
   let stringified = JSON.stringify(object)
   sessionStorage.setItem(key, stringified)
@@ -23,4 +29,10 @@ export function getSessionStorage(key) {
   let item = sessionStorage.getItem(key)
   let parsed = JSON.parse(item)
   return parsed
+}
+
+export function updateSessionStorage(key, object){
+  let currentStorage = getSessionStorage(key)
+  currentStorage.push(object)
+  setSessionStorage(key, currentStorage)
 }
