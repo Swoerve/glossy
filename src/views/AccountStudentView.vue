@@ -21,7 +21,7 @@
     </div>
   </nav>
 
-  <h1>Hej elev!</h1>
+  <h1>Hej {{name}}!</h1>
 
   <section id="course-section">
     <h2>Kurser</h2>

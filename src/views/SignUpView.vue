@@ -9,6 +9,7 @@ const classCode = ref(null)
 const email = ref(null)
 const password = ref(null)
 const checked = ref(false)
+const name = ref(null)
 
 
 //Kollar så att alla fält är ifyllda och checkar om värdet från select element är lärare eller elev
@@ -38,6 +39,8 @@ function register(){
         <h1 id="header">Registrera dig</h1>
         <p>E-mail: {{ email }}</p>
         <input v-model="email" placeholder="Skriv in din skolmail här" class="signup-input"><br>
+        <p>Namn: {{ name }}</p>
+        <input v-model="name" placeholder="John Doe" class="signup-input"><br>
         <p>Lösenord: {{ password }}</p>
         <input v-model="password" placeholder="Ge aldrig ut ditt lösenord" class="signup-input"><br>
         <p>Välj din roll:</p>
