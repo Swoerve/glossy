@@ -23,6 +23,20 @@ const quiz = ref({
   stars: 0
 })
 
+// Funktion för att lägga till en ny fråga
+function addQuestion() {
+  quiz.value.questions.push({
+    title: "",
+    answers: [""], 
+    correctAnswer: 0
+  })
+}
+
+// Funktion för att lägga till ett nytt svarsalternativ till en specifik fråga
+function addAnswer(questionIndex) {
+  quiz.value.questions[questionIndex].answers.push("")
+}
+
 </script>
 
 <template>
@@ -37,15 +51,33 @@ const quiz = ref({
             <option value="2">Medel</option>
             <option value="3">Hård</option>
         </select>
-        <p class="quiztext">Fråga 1 {{ question1 }}</p>
-        <input v-model="question1" placeholder="Skriv fråga 1" class="quizbutton"   >
-        <p class="quiztext">Lägg till svarsalternativ</p>
-        <button class="quizbutton">+</button>
-        <p class="quiztext">Lägg till fler frågor</p>
-        <button class="quizbutton">+</button><br>
-        <button class="done-button">Klar</button>
+
+          <!-- Loopar igenom alla frågor -->
+      <div v-for="(question, qIndex) in quiz.questions" :key="qIndex" class="question-block">
+        <p class="quiztext">Fråga {{ qIndex + 1 }}</p>
+        <input v-model="question.title" placeholder="Skriv fråga" class="quizbutton">
+
+        <!-- Poängknapp -->
+        <p class = "quiztext">Poäng för denna fråga</p>
+        <input type="number" v-model="question.points" placeholder="Poäng" class="quizbutton">
+        
+        <!-- Loopar igenom svarsalternativ för varje fråga -->
+        <p class="quiztext">Svarsalternativ:</p>
+        <div v-for="(answer, aIndex) in question.answers" :key="aIndex" class="answer-block">
+          <input v-model="question.answers[aIndex]" placeholder="Skriv svarsalternativ" class="quizbutton">
+        </div>
+        <!-- Lägger till nytt svarsalternativ -->
+        <button @click="addAnswer(qIndex)" class="quizbutton">+ Lägg till svarsalternativ</button>
       </div>
+      
+      <!-- Lägger till ny fråga -->
+      <p class="quiztext">Lägg till fler frågor</p>
+      <button @click="addQuestion" class="quizbutton">+ Lägg till fråga</button><br>
+      
+     
+      <button class="done-button">Klar</button>
     </div>
+  </div>
 </template>
 
 <style scoped>
