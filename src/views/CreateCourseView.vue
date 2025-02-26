@@ -1,8 +1,9 @@
 <script setup>
-import { getLocalStorage, setLocalStorage } from "@/storageHandler";
+import { getLocalStorage, setLocalStorage } from "@/storageHandler"
 import { ref } from "vue"
 import { useRouter } from "vue-router"
-import { RouterLink, RouterView } from "vue-router";
+import { RouterLink, RouterView } from "vue-router"
+import { v4 as uuidv4 } from 'uuid'
 
 const router = useRouter();
 
@@ -18,7 +19,7 @@ if(courses){
 
 function läggTillKurs() {
   if (kursNamn.value && kursKod.value) {
-    kurser.value.push({ name: kursNamn.value, code: kursKod.value })
+    kurser.value.push({ id: uuidv4(), name: kursNamn.value, code: kursKod.value , students: [], quizzes: []})
     kursNamn.value = ''
     kursKod.value = ''
     setLocalStorage('courses', kurser.value)
