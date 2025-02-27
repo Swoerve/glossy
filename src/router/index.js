@@ -8,6 +8,7 @@ import CreateQuizView from "@/views/CreateQuizView.vue"
 import QuizView from "@/views/QuizView.vue"
 import CreateCourseView from "@/views/CreateCourseView.vue"
 import TeacherCourseView from "@/views/TeacherCourseView.vue"
+import StudentProfileView from "@/views/StudentProfileView.vue"
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -39,6 +40,11 @@ const router = createRouter({
       path: "/student/:studentid",
       name: "studentview",
       component: AccountStudentView
+    },
+    {
+      path: "/student/:studentid/studentprofileview",
+      name: "studentprofile",
+      component: StudentProfileView
     },
     {
       path: "/accountstudentview/quizview",

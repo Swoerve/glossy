@@ -1,17 +1,17 @@
 <script setup>
-  import { ref } from 'vue'
-  import Settings from '@/components/user-settings.vue'
-  import { getLocalStorage, getSessionStorage } from '@/storageHandler'
+  import { ref } from "vue"
+  import Settings from "@/components/user-settings.vue"
+  import { getLocalStorage, getSessionStorage } from "@/storageHandler"
   const showSettings = ref(null)
   const student = ref(null)
   const courses = ref(null)
 
-  if (getSessionStorage('loggedin')) {
-    student.value = getSessionStorage('loggedin')
+  if (getSessionStorage("loggedin")) {
+    student.value = getSessionStorage("loggedin")
   }
 
-  if (getLocalStorage('courses')) {
-    let temp = getLocalStorage('courses')
+  if (getLocalStorage("courses")) {
+    let temp = getLocalStorage("courses")
     let result = temp.filter((course) => {
       return student.value.courses.includes(course.id)
     })
@@ -25,7 +25,7 @@
       <button>Gå till quiz</button>
     </router-link>
 
-    <router-link to="/studentprofileview">
+    <router-link to="studentprofile">
       <button>Profil</button>
     </router-link>
 
