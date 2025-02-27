@@ -12,6 +12,7 @@ import TeacherCourseView from "@/views/TeacherCourseView.vue"
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes: [
+    // Generic Routes
     {
       path: "/",
       name: "home",
@@ -29,19 +30,26 @@ const router = createRouter({
       component: LoginView
     },
     {
-      path: "/teacher/:userid",
-      name: "accountteacherview",
-      component: AccountTeacherView
-    },
-    {
       path: "/signupview",
       name: "signupview",
       component: SignUpView
     },
+    // Student routes
     {
       path: "/student/:studentid",
       name: "studentview",
       component: AccountStudentView
+    },
+    {
+      path: "/accountstudentview/quizview",
+      name: "quizview",
+      component: QuizView
+    },
+    // Teacher routes
+    {
+      path: "/teacher/:userid",
+      name: "accountteacherview",
+      component: AccountTeacherView
     },
     {
       path: "/teacher/:userid/course/:courseid",
@@ -52,11 +60,6 @@ const router = createRouter({
       path: "/teacher/:userid/course/:courseid/newquiz",
       name: "newquiz",
       component: CreateQuizView
-    },
-    {
-      path: "/accountstudentview/quizview",
-      name: "quizview",
-      component: QuizView
     },
     {
       path: "/createcourseview",
