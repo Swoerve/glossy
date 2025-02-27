@@ -3,9 +3,11 @@
   import Settings from '@/components/user-settings.vue'
   import { getLocalStorage, getSessionStorage } from '@/storageHandler'
   import { updateLocalStorage, updateSessionStorage } from '@/storageHandler'
+  import { useRoute } from 'vue-router'
 
   const teacher = ref(null)
   const courses = ref(null)
+  const route = useRoute()
 
   if (getSessionStorage('loggedin')) {
     teacher.value = getSessionStorage('loggedin')
@@ -14,7 +16,7 @@
   if (getLocalStorage('courses')) {
     let temp = getLocalStorage('courses')
     let result = temp.filter((course) => {
-      return teacher.value.courses.includes(course.id)
+      return true //teacher.value.courses.includes(course.id)
     })
     courses.value = result
   }
@@ -25,7 +27,7 @@
 
 <template>
   <nav id="idk">
-    <router-link>
+    <router-link to="/test">
       <button class="account-button">Statistik</button>
     </router-link>
 
@@ -42,17 +44,20 @@
     <h2>Dina kurser</h2>
     <template v-if="courses">
       <template v-for="course in courses" :key="course.id">
-        <h3>{{ course.name }}</h3>
+        <router-link
+          :to="`/teacher/${route.params.userid}/course/${course.id}/`"
+        >
+          <h3>{{ course.name }}</h3>
+        </router-link>
       </template>
     </template>
     <template v-else>
       <h1>Du har inga kurser inlaggda</h1>
     </template>
-    <div>
-      <router-link to="/createcourseview">
-        <button class="account-button">Skapa en ny kurs (+)</button>
-      </router-link>
-    </div>
+    <router-link to="/createcourseview">
+      <button class="account-button">Skapa en ny kurs (+)</button>
+    </router-link>
+    <div />
   </section>
 </template>
 
