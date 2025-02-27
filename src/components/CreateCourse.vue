@@ -27,7 +27,7 @@
 </template>
 <!-- <template>
   <div v-if="isOpen" class="modal-overlay">
-    <div class="modal-content" @click.stop> 
+    <div class="modal-content" @click.stop>
       <section>
         <form @submit="createCourse">
           <label for="coursename"></label>

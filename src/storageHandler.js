@@ -1,7 +1,7 @@
 /**
  * stringifies an object and saves it at key in localstorage
- * @param {String} key 
- * @param {Object} object 
+ * @param {String} key
+ * @param {Object} object
  */
 export function setLocalStorage(key, object) {
   let stringified = JSON.stringify(object)
@@ -14,12 +14,12 @@ export function getLocalStorage(key) {
   return parsed
 }
 
-export function updateLocalStorage(key, object){
-  if(getLocalStorage(key)){
+export function updateLocalStorage(key, object) {
+  if (getLocalStorage(key)) {
     let currentStorage = getLocalStorage(key)
     currentStorage.push(object)
     setLocalStorage(key, currentStorage)
-  }else{
+  } else {
     let temp = [object]
     setLocalStorage(key, temp)
   }
@@ -36,12 +36,12 @@ export function getSessionStorage(key) {
   return parsed
 }
 
-export function updateSessionStorage(key, object){
-  if(getSessionStorage(key)){
+export function updateSessionStorage(key, object) {
+  if (getSessionStorage(key)) {
     let currentStorage = getSessionStorage(key)
     currentStorage.push(object)
     setSessionStorage(key, currentStorage)
-  }else{
+  } else {
     let temp = [object]
     setSessionStorage(key, temp)
   }
