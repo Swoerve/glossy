@@ -1,16 +1,16 @@
 <script setup>
-  import { setSessionStorage, setLocalStorage } from '@/storageHandler'
-  import { updateLocalStorage, updateSessionStorage } from '@/storageHandler'
+  import { setSessionStorage, setLocalStorage } from "@/storageHandler"
+  import { updateLocalStorage, updateSessionStorage } from "@/storageHandler"
 
-  import { v4 } from 'uuid'
-  import { ref } from 'vue'
-  import { useRouter } from 'vue-router'
+  import { v4 } from "uuid"
+  import { ref } from "vue"
+  import { useRouter } from "vue-router"
 
   const router = useRouter()
 
-  const role = ref('student')
+  const role = ref("student")
   const classCode = ref(null)
-  const email = ref('')
+  const email = ref("")
   const password = ref(null)
   const checked = ref(false)
   const name = ref(null)
@@ -33,34 +33,34 @@
     //Skapar ett objekt för användaren
     let user = {
       id: null,
-      name: '',
-      email: '',
-      password: '',
+      name: "",
+      email: "",
+      password: "",
       courses: []
     }
 
     if (email.value && password.value && role.value && checked.value) {
-      if (role.value === 'teacher') {
+      if (role.value === "teacher") {
         user.id = v4()
         user.name = name.value
         user.email = email.value
         user.password = password.value
-        setSessionStorage('loggedin', user) //Kollar att användaren är inloggad
-        updateLocalStorage('teacher') //Lägger till konton i localStorage
+        setSessionStorage("loggedin", user) //Kollar att användaren är inloggad
+        updateLocalStorage("teachers") //Lägger till konton i localStorage
 
         router.push(`/teacher/${user.id}`) //Gör att knappen skickar dig till lärarvyn
-      } else if (role.value === 'student') {
+      } else if (role.value === "student") {
         user.id = v4()
         user.name = name.value
         user.email = email.value
         user.password = password.value
-        setSessionStorage('loggedin', user)
-        updateLocalStorage('students', user)
+        setSessionStorage("loggedin", user)
+        updateLocalStorage("students", user)
 
         router.push(`/student/${user.id}`) // Gör att knappen skickar användren till elevvyn
       }
     } else {
-      alert('Fyll i alla fält och acceptera villkoren')
+      alert("Fyll i alla fält och acceptera villkoren")
     }
   }
 </script>
