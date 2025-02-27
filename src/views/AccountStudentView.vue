@@ -1,43 +1,42 @@
 <script setup>
-  import { ref } from 'vue'
-  import Settings from '@/components/user-settings.vue'
-  import { getLocalStorage, getSessionStorage } from '@/storageHandler'
+  import { ref } from "vue"
+  import Settings from "@/components/user-settings.vue"
+  import {
+    getLocalStorage,
+    getSessionStorage,
+    replaceLocalStorage,
+    replaceLogin,
+    replaceSessionStorage
+  } from "@/storageHandler"
   const showSettings = ref(null)
   const student = ref(null)
   const courses = ref(null)
+  const cCode = ref("")
 
-  if (getSessionStorage('loggedin')) {
-    student.value = getSessionStorage('loggedin')
+  if (getSessionStorage("loggedin")) {
+    student.value = getSessionStorage("loggedin")
   }
 
-  if (getLocalStorage('courses')) {
-    let temp = getLocalStorage('courses')
+  if (getLocalStorage("courses")) {
+    let temp = getLocalStorage("courses")
     let result = temp.filter((course) => {
       return student.value.courses.includes(course.id)
     })
     courses.value = result
   }
+
+  function joinCourse() {
+    let course = getLocalStorage("courses").filter((obj) => {
+      return obj.code === cCode.value
+    })
+
+    student.value.courses.push(course[0].id)
+    replaceLocalStorage("students", student.value)
+    replaceLogin(student.value)
+  }
 </script>
 
 <template>
-  <nav id="navbar">
-    <router-link to="accountstudentview/quizview">
-      <button>Gå till quiz</button>
-    </router-link>
-
-    <router-link to="/studentprofileview">
-      <button>Profil</button>
-    </router-link>
-
-    <div>
-      <!-- Detta gör att en settings ruta dyker upp-->
-      <button @click="showSettings = true" class="account-button">
-        Inställningar
-      </button>
-      <Settings :is-open="showSettings" @close="showSettings = false" />
-    </div>
-  </nav>
-
   <h1>Hej {{ student.name }}!</h1>
 
   <section id="course-section">
@@ -52,6 +51,8 @@
         You aren't part of any courses, ask your teacher for a course code
       </h1>
     </template>
+    <input type="text" name="" id="" v-model="cCode" />
+    <button @click="joinCourse()">Join course</button>
   </section>
 </template>
 
