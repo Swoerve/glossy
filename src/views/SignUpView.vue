@@ -85,13 +85,14 @@
         v-model="name"
         placeholder="John Doe"
         class="signup-input"
-        type="password"
+        type="text"
       /><br />
       <p>Lösenord: {{ password }}</p>
       <input
         v-model="password"
         placeholder="Ge aldrig ut ditt lösenord"
         class="signup-input"
+        type="password"
       /><br />
       <p>Välj din roll:</p>
       <select v-model="role" class="signup-input">
