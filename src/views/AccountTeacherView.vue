@@ -30,14 +30,14 @@
 
   <nav id="idk">
     <!--Tar dig kurs sidan-->
-    <!-- <router-link to="/createcourseview">
+    <router-link to="/createcourseview">
       <button class="account-button">Kurser</button>
-    </router-link> -->
+    </router-link>
 
     <!--Detta tar en till en ny sida där man kan skapa ett quiz-->
-    <router-link to="/createquizview">
+    <!-- <router-link to="/createquizview">
       <button class="account-button">Skapa quiz</button>
-    </router-link>
+    </router-link> -->
 
     <router-link>
       <button class="account-button">Statistik</button>
