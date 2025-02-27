@@ -1,6 +1,23 @@
 <script setup>
   import { ref } from 'vue'
   import Settings from '@/components/user-settings.vue'
+  import { getLocalStorage, getSessionStorage } from '@/storageHandler'
+  import { updateLocalStorage, updateSessionStorage } from '@/storageHandler'
+
+  const teacher = ref(null)
+  const courses = ref(null)
+
+  if (getSessionStorage('loggedin')) {
+    teacher.value = getSessionStorage('loggedin')
+  }
+
+  if (getLocalStorage('courses')) {
+    let temp = getLocalStorage('courses')
+    let result = temp.filter((course) => {
+      return teacher.value.courses.includes(course.id)
+    })
+    courses.value = result
+  }
 
   const showModal = ref(false)
   const showSettings = ref(false)
@@ -11,37 +28,41 @@
     <img src="../assets/glossy.png" alt="logo" class="logo" />
   </div>
 
-  <div id="idk">
-    <h1 id="h1">Välkommen lärare</h1>
+  <nav id="idk">
+    <!--Tar dig kurs sidan-->
+    <!-- <router-link to="/createcourseview">
+      <button class="account-button">Kurser</button>
+    </router-link> -->
 
-    <div>
-      <!--Tar dig kurs sidan-->
-      <router-link to="/createcourseview">
-        <button class="account-button">Kurser</button>
-      </router-link>
-    </div>
+    <!--Detta tar en till en ny sida där man kan skapa ett quiz-->
+    <router-link to="/createquizview">
+      <button class="account-button">Skapa quiz</button>
+    </router-link>
 
-    <!-- <div> Detta gör att en liten ruta med ett input fålt dyker upp
-    <button @click="showModal = true" class="account-button">Skapa en ny kurs</button>
-    <CreateCourse :isOpen="showModal" @close="showModal = false"></CreateCourse>
-  </div> -->
+    <router-link>
+      <button class="account-button">Statistik</button>
+    </router-link>
 
-    <div>
-      <!--Detta tar en till en ny sida där man kan skapa ett quiz-->
-      <router-link to="/createquizview">
-        <button class="account-button">Skapa quiz</button>
-      </router-link>
-    </div>
-    <button class="account-button">Statistik</button>
+    <!-- Detta gör att en settings ruta dyker upp-->
+    <button @click="showSettings = true" class="account-button">
+      Inställningar
+    </button>
+    <Settings :is-open="showSettings" @close="showSettings = false" />
+  </nav>
 
-    <div>
-      <!-- Detta gör att en settings ruta dyker upp-->
-      <button @click="showSettings = true" class="account-button">
-        Inställningar
-      </button>
-      <Settings :is-open="showSettings" @close="showSettings = false" />
-    </div>
-  </div>
+  <h1 id="h1">Välkommen {{ teacher.name }}</h1>
+
+  <section id="course-section">
+    <h2>Dina kurser</h2>
+    <template v-if="courses">
+      <template v-for="course in courses" :key="course.id">
+        <h1>{{ course.name }}</h1>
+      </template>
+    </template>
+    <template v-else>
+      <h1>Du har inga kurser inlaggda</h1>
+    </template>
+  </section>
 </template>
 
 <style scoped>
@@ -62,10 +83,7 @@
 
   #idk {
     display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    width: 100%;
+    flex-direction: row;
   }
 
   .account-button {
