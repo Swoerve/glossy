@@ -77,21 +77,12 @@ then retrieve that info and put it into question components?
       :question="quiz.questions[currQuestion]"
       @answered="addAnswer"
     />
-    <button
-      v-if="currQuestion > 0"
-      @click="
-        currQuestion -= 1
-        console.log(currQuestion)
-      "
-    >
+    <button v-if="currQuestion > 0" @click="currQuestion -= 1">
       Prev Question
     </button>
     <button
       v-if="currQuestion < quiz.questions.length - 1"
-      @click="
-        currQuestion += 1
-        console.log(currQuestion)
-      "
+      @click="currQuestion += 1"
     >
       Next Question
     </button>
