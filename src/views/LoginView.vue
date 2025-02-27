@@ -11,7 +11,7 @@
   function login(user) {
     if (user === "teacher") {
       let teachers = getLocalStorage("teachers")
-      console.log(teachers)
+
       let filtered = teachers.filter((obj) => {
         console.log(obj)
         if (email.value === obj.email && password.value === obj.password) {
@@ -20,18 +20,20 @@
           return false
         }
       })
-      console.log(filtered)
+
       setSessionStorage("loggedin", filtered[0])
       router.push(`/teacher/${filtered[0].id}`)
     } else {
       let students = getLocalStorage("students")
+
       let filtered = students.filter((obj) => {
-        if (email.value === obj.email && password.value === obj.value) {
+        if (email.value === obj.email && password.value === obj.password) {
           return true
         } else {
           return false
         }
       })
+
       setSessionStorage("loggedin", filtered[0])
       router.push(`/student/${filtered[0].id}`)
     }
