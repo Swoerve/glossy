@@ -40,7 +40,7 @@
     <div class="form-group">
       <input v-model="kursNamn" placeholder="Kursnamn" class="input-field" />
       <input v-model="kursKod" placeholder="Kurskod" class="input-field" />
-      <button @click="läggTillKurs;" class="add-button">Lägg till kurs</button>
+      <button @click="läggTillKurs()" class="add-button">Lägg till kurs</button>
       <!-- Lista över kurser och kurskod som skapats -->
     </div>
     <h2 class="subtitle">Dina kurser</h2>

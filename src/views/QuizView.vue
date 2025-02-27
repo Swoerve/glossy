@@ -1,5 +1,5 @@
 <script setup>
-  import Question from '@/components/quiz/Question.vue'
+  import Question from '@/components/quiz/quiz-question.vue'
   import { ref } from 'vue'
 
   // Quiz object
@@ -104,7 +104,7 @@ then retrieve that info and put it into question components?
   </template>
   <template v-else>
     <div>
-      <template v-for="(question, ind) in quiz.questions">
+      <template v-for="(question, ind) in quiz.questions" :key="ind">
         <h4>{{ question.title }}</h4>
         <!-- <p>Correct: {{ question.answers[question.correctAnswer] }}</p> -->
         <p

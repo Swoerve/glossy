@@ -43,10 +43,8 @@
   <section id="course-section">
     <h2>Kurser</h2>
     <template v-if="courses">
-      <template v-for="course in courses">
-        <div>
-          <h1>{{ course.name }}</h1>
-        </div>
+      <template v-for="course in courses" :key="course.id">
+        <h1>{{ course.name }}</h1>
       </template>
     </template>
     <template v-else>
