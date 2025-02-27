@@ -1,20 +1,20 @@
 <script setup>
-  import { ref } from 'vue'
-  import Settings from '@/components/user-settings.vue'
-  import { getLocalStorage, getSessionStorage } from '@/storageHandler'
-  import { updateLocalStorage, updateSessionStorage } from '@/storageHandler'
-  import { useRoute } from 'vue-router'
+  import { ref } from "vue"
+  import Settings from "@/components/user-settings.vue"
+  import { getLocalStorage, getSessionStorage } from "@/storageHandler"
+  import { updateLocalStorage, updateSessionStorage } from "@/storageHandler"
+  import { useRoute } from "vue-router"
 
   const teacher = ref(null)
   const courses = ref(null)
   const route = useRoute()
 
-  if (getSessionStorage('loggedin')) {
-    teacher.value = getSessionStorage('loggedin')
+  if (getSessionStorage("loggedin")) {
+    teacher.value = getSessionStorage("loggedin")
   }
 
-  if (getLocalStorage('courses')) {
-    let temp = getLocalStorage('courses')
+  if (getLocalStorage("courses")) {
+    let temp = getLocalStorage("courses")
     let result = temp.filter((course) => {
       return true //teacher.value.courses.includes(course.id)
     })

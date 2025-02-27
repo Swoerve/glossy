@@ -1,9 +1,38 @@
 <script setup>
-  import { ref } from 'vue'
-  import { useRouter } from 'vue-router'
-  import { RouterLink, RouterView } from 'vue-router'
+  import { getLocalStorage, setSessionStorage } from "@/storageHandler"
+  import { ref } from "vue"
+  import { useRouter } from "vue-router"
+  import { RouterLink, RouterView } from "vue-router"
 
   const router = useRouter()
+  const email = ref("")
+  const password = ref("")
+
+  function login(user) {
+    if (user === "teacher") {
+      let teachers = getLocalStorage("teachers")
+      let filtered = teachers.filter((obj) => {
+        if (email.value === obj.email && password.value === obj.value) {
+          return true
+        } else {
+          return false
+        }
+      })
+      setSessionStorage("loggedin", filtered[0])
+      router.push(`/teacher/${filtered[0].id}`)
+    } else {
+      let students = getLocalStorage("students")
+      let filtered = students.filter((obj) => {
+        if (email.value === obj.email && password.value === obj.value) {
+          return true
+        } else {
+          return false
+        }
+      })
+      setSessionStorage("loggedin", filtered[0])
+      router.push(`/student/${filtered[0].id}`)
+    }
+  }
 </script>
 
 <template>
@@ -12,17 +41,23 @@
       <img src="../assets/glossy.png" alt="logo" class="logo" />
     </div>
 
-    <router-link to="/accountstudentview">
-      <button class="login-button login-student-button">
-        Logga in som elev
-      </button>
-    </router-link>
+    <input type="email" name="" id="" placeholder="email" v-model="email" />
 
-    <router-link to="/accountteacherview">
-      <button class="login-button login-teacher-button">
-        Logga in som lärare
-      </button>
-    </router-link>
+    <input
+      type="password"
+      name=""
+      id=""
+      placeholder="password"
+      v-model="password"
+    />
+
+    <button @click="login('student')" class="login-button login-student-button">
+      Logga in som elev
+    </button>
+
+    <button @click="login('teacher')" class="login-button login-teacher-button">
+      Logga in som lärare
+    </button>
 
     <router-link to="/">
       <button class="back">Tillbaka</button>
