@@ -1,14 +1,15 @@
 <script setup>
+  import { getLocalStorage, setLocalStorage } from '@/storageHandler'
   import { ref } from 'vue'
-  import { useRouter } from 'vue-router'
+  import { useRoute, useRouter } from 'vue-router'
 
-  const router = useRouter()
-
-  const role = ref(null)
-  const classCode = ref(null)
-  const email = ref(null)
-  const password = ref(null)
-  const checked = ref(null)
+  const route = useRoute()
+  const course = ref(null)
+  course.value = getLocalStorage('courses').filter((obj) => {
+    return obj.id === route.params.courseid
+  })
+  course.value = course.value[0]
+  console.log(course.value)
 
   // Quiz object
   const quiz = ref({
@@ -24,7 +25,7 @@
     stars: 0
   })
 
-  // Funktion för att lägga till en ny fråga
+  // Function to add a new question to the quiz
   function addQuestion() {
     quiz.value.questions.push({
       title: '',
@@ -33,16 +34,29 @@
     })
   }
 
-  // Funktion för att lägga till ett nytt svarsalternativ till en specifik fråga
+  // Function to add a new answer to a specific question
   function addAnswer(questionIndex) {
     quiz.value.questions[questionIndex].answers.push('')
+  }
+
+  function createQuestion() {
+    console.log('creating')
+    let courses = getLocalStorage('courses')
+    let obj = courses.find((o, i) => {
+      if (o.id === route.params.courseid) {
+        console.log('found course')
+        courses[i].quizzes.push(quiz.value)
+        return true
+      }
+    })
+    setLocalStorage('courses', courses)
   }
 </script>
 
 <template>
   <div class="createquiz-container">
     <div id="quiz">
-      <h1 id="header">Skapa quiz</h1>
+      <h1 id="header">Skapa ny quiz for {{ course.name }}</h1>
       <p class="quiztext">Titel</p>
       <input
         v-model="quiz.title"
@@ -74,27 +88,23 @@
           class="quizbutton"
         />
 
-        <!-- Poängknapp -->
-        <p class="quiztext">Poäng för denna fråga</p>
-        <input
-          type="number"
-          v-model="question.points"
-          placeholder="Poäng"
-          class="quizbutton"
-        />
-
         <!-- Loopar igenom svarsalternativ för varje fråga -->
         <p class="quiztext">Svarsalternativ:</p>
-        <div
-          v-for="(answer, aIndex) in question.answers"
-          :key="aIndex"
-          class="answer-block"
-        >
-          <input
-            v-model="question.answers[aIndex]"
-            placeholder="Skriv svarsalternativ"
-            class="quizbutton"
-          />
+        <div class="answer-block">
+          <template v-for="(answer, aIndex) in question.answers" :key="aIndex">
+            <input
+              v-model="question.answers[aIndex]"
+              placeholder="Skriv svarsalternativ"
+              class="quizbutton"
+            />
+            <input
+              type="radio"
+              :value="aIndex"
+              v-model="question.correctAnswer"
+              :id="aIndex"
+              name="correct"
+            />
+          </template>
         </div>
         <!-- Lägger till nytt svarsalternativ -->
         <button @click="addAnswer(qIndex)" class="quizbutton">
@@ -107,7 +117,7 @@
       <button @click="addQuestion" class="quizbutton">+ Lägg till fråga</button
       ><br />
 
-      <button class="done-button">Klar</button>
+      <button class="done-button" @click="createQuestion">Klar</button>
     </div>
   </div>
 </template>
