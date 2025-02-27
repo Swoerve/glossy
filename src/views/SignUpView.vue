@@ -109,8 +109,8 @@
       /><br />
       <p>Jag accepterar villkoren✅</p>
       <a href="https://www.google.se/?hl=sv">Villkor</a>
+      <label id="label" for="terms">checkbox</label>
       <input type="checkbox" id="terms" v-model="checked" />
-      <label for="terms"> {{ checked }}</label>
       <button @click="register" id="signup-button">Registrera dig</button>
       <router-link to="/">
         <button class="back">Tillbaka</button>
@@ -181,4 +181,10 @@
     background-color: #f2ebfb;
     margin-left: 170px;
   }
+
+  #label{
+    display:none;
+  }
+
+
 </style>
