@@ -74,18 +74,25 @@
       <h1 id="header">Registrera dig</h1>
       <p>E-mail: {{ email }}</p>
       <input
+        type="email"
         v-model="email"
         placeholder="Skriv in din skolmail här"
         class="signup-input"
       /><br />
       <p v-show="!isValidEmail() && email.length > 0">hej</p>
       <p>Namn: {{ name }}</p>
-      <input v-model="name" placeholder="John Doe" class="signup-input" /><br />
+      <input
+        v-model="name"
+        placeholder="John Doe"
+        class="signup-input"
+        type="text"
+      /><br />
       <p>Lösenord: {{ password }}</p>
       <input
         v-model="password"
         placeholder="Ge aldrig ut ditt lösenord"
         class="signup-input"
+        type="password"
       /><br />
       <p>Välj din roll:</p>
       <select v-model="role" class="signup-input">

@@ -57,7 +57,6 @@
     <router-link to="/createcourseview">
       <button class="account-button">Skapa en ny kurs (+)</button>
     </router-link>
-    <div />
   </section>
 </template>
 
