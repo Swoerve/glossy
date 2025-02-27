@@ -24,10 +24,6 @@
 </script>
 
 <template>
-  <div class="logo-container">
-    <img src="../assets/glossy.png" alt="logo" class="logo" />
-  </div>
-
   <nav id="idk">
     <router-link>
       <button class="account-button">Statistik</button>
@@ -46,12 +42,17 @@
     <h2>Dina kurser</h2>
     <template v-if="courses">
       <template v-for="course in courses" :key="course.id">
-        <h1>{{ course.name }}</h1>
+        <h3>{{ course.name }}</h3>
       </template>
     </template>
     <template v-else>
       <h1>Du har inga kurser inlaggda</h1>
     </template>
+    <div>
+      <router-link to="/createcourseview">
+        <button class="account-button">Skapa en ny kurs (+)</button>
+      </router-link>
+    </div>
   </section>
 </template>
 
@@ -68,18 +69,21 @@
   }
 
   #h1 {
-    color: white;
+    color: #0d0d0d;
+    text-align: center;
   }
 
   #idk {
     display: flex;
     flex-direction: row;
+    justify-content: end;
+    gap: 20px;
   }
 
   .account-button {
-    margin-top: 15px;
+    margin: 0;
     height: 40px;
-    width: 170px;
+    width: 150px;
     color: white;
     background-color: #9667e0;
     border: 0.5px solid #d4bbfc;
