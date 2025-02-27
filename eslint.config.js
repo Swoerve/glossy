@@ -1,14 +1,26 @@
 import pluginVue from 'eslint-plugin-vue'
 
 export default [
-  // add more generic rulesets here, such as:
-  // js.configs.recommended,
   ...pluginVue.configs['flat/recommended'],
-  // ...pluginVue.configs['flat/vue2-recommended'], // Use this if you are using Vue.js 2.x.
   {
     rules: {
-      // override/add rules settings here, such as:
-      // 'vue/no-unused-vars': 'error'
+      'vue/html-closing-bracket-newline': 'off',
+      'vue/html-indent': 'off',
+      'vue/html-self-closing': [
+        'warn',
+        {
+          html: {
+            component: 'always',
+            normal: 'always',
+            void: 'always'
+          }
+        }
+      ],
+      'vue/attributes-order': 'off',
+      'vue/max-attributes-per-line': 'off',
+      'vue/multiline-html-element-content-newline': 'off',
+      'vue/order-in-components': 'off',
+      'vue/singleline-html-element-content-newline': 'off'
     }
   }
 ]
