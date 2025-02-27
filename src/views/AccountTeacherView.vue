@@ -1,47 +1,59 @@
 <script setup>
   import { ref } from 'vue'
   import Settings from '@/components/user-settings.vue'
+  import { getLocalStorage, getSessionStorage } from '@/storageHandler'
+  import { updateLocalStorage, updateSessionStorage } from '@/storageHandler'
+
+  const teacher = ref(null)
+  const courses = ref(null)
+
+  if (getSessionStorage('loggedin')) {
+    teacher.value = getSessionStorage('loggedin')
+  }
+
+  if (getLocalStorage('courses')) {
+    let temp = getLocalStorage('courses')
+    let result = temp.filter((course) => {
+      return teacher.value.courses.includes(course.id)
+    })
+    courses.value = result
+  }
 
   const showModal = ref(false)
   const showSettings = ref(false)
 </script>
 
 <template>
-  <div class="logo-container">
-    <img src="../assets/glossy.png" alt="logo" class="logo" />
-  </div>
+  <nav id="idk">
+    <router-link>
+      <button class="account-button">Statistik</button>
+    </router-link>
 
-  <div id="idk">
-    <h1 id="h1">Välkommen lärare</h1>
+    <!-- Detta gör att en settings ruta dyker upp-->
+    <button @click="showSettings = true" class="account-button">
+      Inställningar
+    </button>
+    <Settings :is-open="showSettings" @close="showSettings = false" />
+  </nav>
 
+  <h1 id="h1">Välkommen {{ teacher.name }}</h1>
+
+  <section id="course-section">
+    <h2>Dina kurser</h2>
+    <template v-if="courses">
+      <template v-for="course in courses" :key="course.id">
+        <h3>{{ course.name }}</h3>
+      </template>
+    </template>
+    <template v-else>
+      <h1>Du har inga kurser inlaggda</h1>
+    </template>
     <div>
-      <!--Tar dig kurs sidan-->
       <router-link to="/createcourseview">
-        <button class="account-button">Kurser</button>
+        <button class="account-button">Skapa en ny kurs (+)</button>
       </router-link>
     </div>
-
-    <!-- <div> Detta gör att en liten ruta med ett input fålt dyker upp
-    <button @click="showModal = true" class="account-button">Skapa en ny kurs</button>
-    <CreateCourse :isOpen="showModal" @close="showModal = false"></CreateCourse>
-  </div> -->
-
-    <div>
-      <!--Detta tar en till en ny sida där man kan skapa ett quiz-->
-      <router-link to="/createquizview">
-        <button class="account-button">Skapa quiz</button>
-      </router-link>
-    </div>
-    <button class="account-button">Statistik</button>
-
-    <div>
-      <!-- Detta gör att en settings ruta dyker upp-->
-      <button @click="showSettings = true" class="account-button">
-        Inställningar
-      </button>
-      <Settings :is-open="showSettings" @close="showSettings = false" />
-    </div>
-  </div>
+  </section>
 </template>
 
 <style scoped>
@@ -57,21 +69,21 @@
   }
 
   #h1 {
-    color: white;
+    color: #0d0d0d;
+    text-align: center;
   }
 
   #idk {
     display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    width: 100%;
+    flex-direction: row;
+    justify-content: end;
+    gap: 20px;
   }
 
   .account-button {
-    margin-top: 15px;
+    margin: 0;
     height: 40px;
-    width: 170px;
+    width: 150px;
     color: white;
     background-color: #9667e0;
     border: 0.5px solid #d4bbfc;
