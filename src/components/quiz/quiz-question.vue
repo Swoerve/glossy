@@ -1,8 +1,8 @@
 <script setup>
   // props
   const { question, qid } = defineProps({
-    question: Object,
-    qid: Number
+    question: { type: Object, required: true },
+    qid: { type: Number, required: true }
   })
 
   // emits
@@ -16,6 +16,7 @@
       v-for="(answer, ind) in question.answers"
       :value="ind"
       @click="$emit('answered', [ind, qid])"
+      :key="ind"
     >
       {{ answer }}
     </button>
