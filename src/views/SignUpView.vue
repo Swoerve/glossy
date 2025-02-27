@@ -41,14 +41,13 @@
 
     if (email.value && password.value && role.value && checked.value) {
       if (role.value === "teacher") {
-        let id = v4()
-        user.id = id
+        user.id = v4()
         user.name = name.value
         user.email = email.value
         user.password = password.value
         console.log(user)
         setSessionStorage("loggedin", user) //Kollar att användaren är inloggad
-        updateLocalStorage("teachers") //Lägger till konton i localStorage
+        updateLocalStorage("teachers", user) //Lägger till konton i localStorage
 
         router.push(`/teacher/${user.id}`) //Gör att knappen skickar dig till lärarvyn
       } else if (role.value === "student") {
@@ -184,9 +183,7 @@
     margin-left: 170px;
   }
 
-  #label{
-    display:none;
+  #label {
+    display: none;
   }
-
-
 </style>

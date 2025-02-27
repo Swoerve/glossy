@@ -20,7 +20,8 @@ export function updateLocalStorage(key, object) {
     currentStorage.push(object)
     setLocalStorage(key, currentStorage)
   } else {
-    let temp = [object]
+    let temp = []
+    temp.push(object)
     setLocalStorage(key, temp)
   }
 }
@@ -42,7 +43,8 @@ export function updateSessionStorage(key, object) {
     currentStorage.push(object)
     setSessionStorage(key, currentStorage)
   } else {
-    let temp = [object]
+    let temp = []
+    temp.push(object)
     setSessionStorage(key, temp)
   }
 }
