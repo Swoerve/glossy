@@ -11,6 +11,7 @@
   function login(user) {
     if (user === "teacher") {
       let teachers = getLocalStorage("teachers")
+      console.log(teachers)
       let filtered = teachers.filter((obj) => {
         if (email.value === obj.email && password.value === obj.value) {
           return true

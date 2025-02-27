@@ -41,10 +41,12 @@
 
     if (email.value && password.value && role.value && checked.value) {
       if (role.value === "teacher") {
-        user.id = v4()
+        let id = v4()
+        user.id = id
         user.name = name.value
         user.email = email.value
         user.password = password.value
+        console.log(user)
         setSessionStorage("loggedin", user) //Kollar att användaren är inloggad
         updateLocalStorage("teachers") //Lägger till konton i localStorage
 
