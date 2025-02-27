@@ -1,6 +1,6 @@
 <script setup>
   import { ref } from 'vue'
-  import Settings from '@/components/Settings.vue'
+  import Settings from '@/components/user-settings.vue'
   import { getLocalStorage, getSessionStorage } from '@/storageHandler'
   const showSettings = ref(null)
   const student = ref(null)
