@@ -21,11 +21,11 @@
 
 <template>
   <nav id="navbar">
-    <router-link to="accountstudentview/quizview">
+    <router-link :to="accountstudentview / quizview">
       <button>Gå till quiz</button>
     </router-link>
 
-    <router-link to="studentprofile">
+    <router-link :to="`/student/${student.id}/studentprofileview`">
       <button>Profil</button>
     </router-link>
 
