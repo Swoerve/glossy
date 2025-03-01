@@ -20,23 +20,9 @@
 </script>
 
 <template>
-  <nav id="navbar">
-    <router-link :to="accountstudentview / quizview">
-      <button>Gå till quiz</button>
-    </router-link>
-
-    <router-link :to="`/student/${student.id}/studentprofileview`">
-      <button>Profil</button>
-    </router-link>
-
-    <div>
-      <!-- Detta gör att en settings ruta dyker upp-->
-      <button @click="showSettings = true" class="account-button">
-        Inställningar
-      </button>
-      <Settings :is-open="showSettings" @close="showSettings = false" />
-    </div>
-  </nav>
+  <!-- <router-link :to="accountstudentview / quizview">
+    <button>Gå till quiz</button>
+  </router-link> -->
 
   <h1>Hej {{ student.name }}!</h1>
 

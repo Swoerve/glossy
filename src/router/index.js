@@ -38,7 +38,7 @@ const router = createRouter({
     // Student routes
     {
       path: "/student/:studentid",
-      name: "studentview",
+      name: "accountstudentview",
       component: AccountStudentView
     },
     {

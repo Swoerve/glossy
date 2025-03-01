@@ -1,80 +1,81 @@
 <script setup>
-  import { RouterLink, RouterView } from 'vue-router'
-  import HelloWorld from './components/HelloWorld.vue'
+  import { ref, computed } from "vue"
+  import { RouterLink, RouterView } from "vue-router"
+  import { useRoute } from "vue-router"
+  import Settings from "@/components/user-settings.vue"
+  import { getLocalStorage, getSessionStorage } from "./storageHandler"
+
+  const showSettings = ref(null)
+  const route = useRoute()
+
+  //Håller koll om det är lärare eller student i route
+  const studentRoute = computed(() => route.name === "accountstudentview")
+  const teacherRoute = computed(() => route.name === "accountteacherview")
+
+  const student = ref(getLocalStorage("students"))
+  const teacher = ref(getLocalStorage("teacher"))
+  console.log(student)
+  console.log(`${student.value}`)
 </script>
 
 <template>
-  <header>
-    <!-- <img alt="Vue logo" class="logo" src="@/assets/logo.svg" width="125" height="125" /> -->
+  <nav>
+    <!--La in en v-if som kollar om routern är för en elev och då visas
+    profilknappen för elven-->
+    <router-link
+      v-if="student && studentRoute"
+      :to="`/student/${student.id}/studentprofileview`"
+    >
+      <button class="navbar-button">Elev profil</button>
+    </router-link>
 
-    <div class="wrapper">
-      <!-- <HelloWorld msg="You did it!" /> -->
+    <!--En v-if som kollar länken är för lärare och visar då kanppen-->
+    <router-link
+      v-if="teacher && teacherRoute"
+      :to="`/teacher/${teacher.id}/teacherprofileview`"
+    >
+      <button class="navbar-button">lärare profil</button>
+    </router-link>
+
+    <div>
+      <button class="navbar-button" @click="showSettings = true">
+        Inställningar
+      </button>
+      <Settings :is-open="showSettings" @close="showSettings = false" />
     </div>
-  </header>
-
+  </nav>
   <RouterView />
 </template>
 
 <style scoped>
-  header {
-    line-height: 1.5;
-    max-height: 100vh;
-  }
-
-  .logo {
-    display: block;
-    margin: 0 auto 2rem;
-  }
-
   nav {
-    width: 100%;
-    font-size: 12px;
-    text-align: center;
-    margin-top: 2rem;
+    display: flex;
+    justify-content: end;
+    gap: 20px;
+    background: linear-gradient(
+      90deg,
+      #ddadeb 7%,
+      #c56bde 37%,
+      #9f4edd 65%,
+      #8b2ad5 89%,
+      #950bbf 98%
+    );
+    height: 50px;
+    align-items: center;
   }
 
-  nav a.router-link-exact-active {
-    color: var(--color-text);
+  .navbar-button {
+    color: #ffffff;
+    font-size: 20px;
+    font-family: "Times New Roman", Times, serif;
+    font-weight: 300;
+    background-color: #5c04660e;
+    padding: 12px;
+    text-decoration: none;
+    border: none;
   }
 
-  nav a.router-link-exact-active:hover {
-    background-color: transparent;
-  }
-
-  nav a {
-    display: inline-block;
-    padding: 0 1rem;
-    border-left: 1px solid var(--color-border);
-  }
-
-  nav a:first-of-type {
-    border: 0;
-  }
-
-  @media (min-width: 1024px) {
-    header {
-      display: flex;
-      place-items: center;
-      padding-right: calc(var(--section-gap) / 2);
-    }
-
-    .logo {
-      margin: 0 2rem 0 0;
-    }
-
-    header .wrapper {
-      display: flex;
-      place-items: flex-start;
-      flex-wrap: wrap;
-    }
-
-    nav {
-      text-align: left;
-      margin-left: -1rem;
-      font-size: 1rem;
-
-      padding: 1rem 0;
-      margin-top: 1rem;
-    }
+  .navbar-button:hover {
+    color: #3e1e40;
   }
 </style>
