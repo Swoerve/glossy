@@ -187,15 +187,15 @@
   }
 
   .logo {
-    width: 500px;
-    height: auto;
+    width: auto;
+    height: calc(40vh - 50px);
   }
 
   .signup-container {
     display: flex;
     justify-content: center;
     align-items: center;
-    min-height: 100vh;
+    min-height: calc(60vh - 50px);
     width: 100%;
     color: black;
   }
