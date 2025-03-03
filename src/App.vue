@@ -20,6 +20,10 @@
 
 <template>
   <nav>
+    <router-link v-if="studentRoute || teacherRoute" :to="`/`">
+      <button class="navbar-button">Logga ut</button>
+    </router-link>
+
     <!--La in en v-if som kollar om routern är för en elev och då visas
     profilknappen för elven-->
     <router-link
