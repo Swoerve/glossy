@@ -13,11 +13,9 @@
   const teacherRoute = computed(() => route.name === "accountteacherview")
 
   const student = ref(getLocalStorage("students"))
-  const teacher = ref(getLocalStorage("teacher"))
+  const teacher = ref(getLocalStorage("teachers"))
   console.log(student)
   console.log(`${student.value}`)
-
-  const showDropDown = ref(false)
 
   // function showList() {
   //   showDropDown.value = true
@@ -30,14 +28,14 @@
 
 <template>
   <nav>
-    <div class="profile-container">
+    <div v-if="studentRoute || teacherRoute" class="profile-container">
       <i id="user" class="fa fa-user" />
       <ul class="user-menu">
         <!--La in en v-if som kollar om routern är för en elev och då visas
       profilknappen för elven-->
         <router-link
           v-if="student && studentRoute"
-          :to="`/student/${student.id}/studentprofileview`"
+          :to="`/student/${route.params.userid}/studentprofileview`"
         >
           <li>Din profil</li>
         </router-link>
@@ -45,7 +43,7 @@
         <!--En v-if som kollar länken är för lärare och visar då kanppen-->
         <router-link
           v-if="teacher && teacherRoute"
-          :to="`/teacher/${teacher.id}/teacherprofileview`"
+          :to="`/teacher/${route.params.userid}/teacherprofileview`"
         >
           <li>Profil</li>
         </router-link>
