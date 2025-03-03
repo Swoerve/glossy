@@ -46,16 +46,18 @@
     <h2>Kurser</h2>
     <template v-if="courses">
       <template v-for="course in courses" :key="course.id">
-        <router-link
-          :to="`/student/${route.params.userid}/course/${course.id}/`"
+        <div
+          class="course-card-container"
+          :style="`background-color: #${course.id.substr(0, 6)}`"
         >
-          <div
-            class="course-card"
-            :style="`background-color: #${course.id.substr(0, 6)}`"
+          <router-link
+            :to="`/student/${route.params.userid}/course/${course.id}/`"
           >
-            <h1>{{ course.name }}</h1>
-          </div>
-        </router-link>
+            <div class="course-card">
+              <h1>{{ course.name }}</h1>
+            </div>
+          </router-link>
+        </div>
       </template>
     </template>
     <template v-else>
@@ -105,5 +107,10 @@
     padding-bottom: 5px;
     border-bottom: black solid 1px;
     border-radius: 10px 10px 0px 0px;
+  }
+
+  .course-card-container {
+    height: 100px;
+    width: 200px;
   }
 </style>
