@@ -8,6 +8,9 @@
     replaceLogin,
     replaceSessionStorage
   } from "@/storageHandler"
+  import { useRoute } from "vue-router"
+
+  const route = useRoute()
   const showSettings = ref(null)
   const student = ref(null)
   const courses = ref(null)
@@ -43,7 +46,11 @@
     <h2>Kurser</h2>
     <template v-if="courses">
       <template v-for="course in courses" :key="course.id">
-        <h1>{{ course.name }}</h1>
+        <router-link
+          :to="`/student/${route.params.userid}/course/${course.id}/`"
+        >
+          <h1>{{ course.name }}</h1>
+        </router-link>
       </template>
     </template>
     <template v-else>

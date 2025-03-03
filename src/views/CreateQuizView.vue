@@ -1,11 +1,12 @@
 <script setup>
-  import { getLocalStorage, setLocalStorage } from '@/storageHandler'
-  import { ref } from 'vue'
-  import { useRoute, useRouter } from 'vue-router'
+  import { getLocalStorage, setLocalStorage } from "@/storageHandler"
+  import { v4 } from "uuid"
+  import { ref } from "vue"
+  import { useRoute, useRouter } from "vue-router"
 
   const route = useRoute()
   const course = ref(null)
-  course.value = getLocalStorage('courses').filter((obj) => {
+  course.value = getLocalStorage("courses").filter((obj) => {
     return obj.id === route.params.courseid
   })
   course.value = course.value[0]
@@ -13,11 +14,12 @@
 
   // Quiz object
   const quiz = ref({
-    title: '',
+    title: "",
+    id: v4(),
     difficulty: 1,
     questions: [
       {
-        title: '',
+        title: "",
         answers: [],
         correctAnswer: 0
       }
@@ -28,28 +30,28 @@
   // Function to add a new question to the quiz
   function addQuestion() {
     quiz.value.questions.push({
-      title: '',
-      answers: [''],
+      title: "",
+      answers: [""],
       correctAnswer: 0
     })
   }
 
   // Function to add a new answer to a specific question
   function addAnswer(questionIndex) {
-    quiz.value.questions[questionIndex].answers.push('')
+    quiz.value.questions[questionIndex].answers.push("")
   }
 
   function createQuestion() {
-    console.log('creating')
-    let courses = getLocalStorage('courses')
+    console.log("creating")
+    let courses = getLocalStorage("courses")
     let obj = courses.find((o, i) => {
       if (o.id === route.params.courseid) {
-        console.log('found course')
+        console.log("found course")
         courses[i].quizzes.push(quiz.value)
         return true
       }
     })
-    setLocalStorage('courses', courses)
+    setLocalStorage("courses", courses)
   }
 </script>
 
