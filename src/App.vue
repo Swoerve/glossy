@@ -16,30 +16,45 @@
   const teacher = ref(getLocalStorage("teacher"))
   console.log(student)
   console.log(`${student.value}`)
+
+  const showDropDown = ref(false)
+
+  // function showList() {
+  //   showDropDown.value = true
+  // }
+
+  // function hideList() {
+  //   showDropDown.value = false
+  // }
 </script>
 
 <template>
   <nav>
-    <router-link v-if="studentRoute || teacherRoute" :to="`/`">
-      <button class="navbar-button">Logga ut</button>
-    </router-link>
+    <div class="profile-container">
+      <i id="user" class="fa fa-user" />
+      <ul class="user-menu">
+        <!--La in en v-if som kollar om routern är för en elev och då visas
+      profilknappen för elven-->
+        <router-link
+          v-if="student && studentRoute"
+          :to="`/student/${student.id}/studentprofileview`"
+        >
+          <li>Din profil</li>
+        </router-link>
 
-    <!--La in en v-if som kollar om routern är för en elev och då visas
-    profilknappen för elven-->
-    <router-link
-      v-if="student && studentRoute"
-      :to="`/student/${student.id}/studentprofileview`"
-    >
-      <button class="navbar-button">Elev profil</button>
-    </router-link>
+        <!--En v-if som kollar länken är för lärare och visar då kanppen-->
+        <router-link
+          v-if="teacher && teacherRoute"
+          :to="`/teacher/${teacher.id}/teacherprofileview`"
+        >
+          <li>Profil</li>
+        </router-link>
 
-    <!--En v-if som kollar länken är för lärare och visar då kanppen-->
-    <router-link
-      v-if="teacher && teacherRoute"
-      :to="`/teacher/${teacher.id}/teacherprofileview`"
-    >
-      <button class="navbar-button">lärare profil</button>
-    </router-link>
+        <router-link v-if="studentRoute || teacherRoute" :to="`/`">
+          <li>Logga ut</li>
+        </router-link>
+      </ul>
+    </div>
 
     <div>
       <button class="navbar-button" @click="showSettings = true">
@@ -66,6 +81,47 @@
     );
     height: 50px;
     align-items: center;
+  }
+
+  .profile-container {
+    position: relative;
+    display: inline-block;
+  }
+
+  #user {
+    font-size: 1.87em;
+  }
+
+  .user-menu {
+    visibility: hidden;
+    opacity: 0;
+    margin: 0.4em;
+    background-color: #cc79ff;
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    min-width: 160px;
+    z-index: 1;
+    transition: opacity 0.1s ease, visibility 0.1s ease;
+    border-radius: 5px;
+    padding: 0;
+  }
+
+  .user-menu li {
+    color: #141313;
+    display: block;
+    text-decoration: none;
+    padding: 1em;
+  }
+
+  .user-menu li:hover {
+    background-color: #d99dff;
+  }
+
+  .profile-container:hover .user-menu {
+    visibility: visible;
+    opacity: 1;
   }
 
   .navbar-button {
