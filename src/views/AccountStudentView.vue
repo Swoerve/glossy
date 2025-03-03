@@ -49,7 +49,12 @@
         <router-link
           :to="`/student/${route.params.userid}/course/${course.id}/`"
         >
-          <h1>{{ course.name }}</h1>
+          <div
+            class="course-card"
+            :style="`background-color: #${course.id.substr(0, 6)}`"
+          >
+            <h1>{{ course.name }}</h1>
+          </div>
         </router-link>
       </template>
     </template>
@@ -87,22 +92,18 @@
     padding: 10px;
     border-radius: 8px;
   }
-
-  ul {
-    display: flex;
-    flex-wrap: wrap;
-    padding: 0;
-    /* justify-content: center; */
-    list-style: none;
-    width: 100em;
+  .course-card {
+    border: black 1px solid;
+    border-radius: 10px;
+    height: 100px;
+    width: 200px;
   }
 
-  li {
+  .course-card h1 {
     background-color: white;
-    padding: 10px;
-    margin: 20px;
-    border-radius: 5px;
-    text-align: center;
-    min-width: 80px; /* Ensures a good size */
+    margin: 0;
+    padding-bottom: 5px;
+    border-bottom: black solid 1px;
+    border-radius: 10px 10px 0px 0px;
   }
 </style>
