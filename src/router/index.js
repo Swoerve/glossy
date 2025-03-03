@@ -39,22 +39,22 @@ const router = createRouter({
     },
     // Student routes
     {
-      path: "/student/:studentid",
+      path: "/student/:userid",
       name: "accountstudentview",
       component: AccountStudentView
     },
     {
-      path: "/student/:studentid/course/:courseid",
+      path: "/student/:userid/course/:courseid",
       name: "studentcourse",
       component: StudentCourseView
     },
     {
-      path: "/student/:studentid/studentprofileview",
+      path: "/student/:userid/studentprofileview",
       name: "studentprofile",
       component: StudentProfileView
     },
     {
-      path: "/student/:studentid/course/:courseid/quiz/:quizid",
+      path: "/student/:userid/course/:courseid/quiz/:quizid",
       name: "quizview",
       component: QuizView
     },

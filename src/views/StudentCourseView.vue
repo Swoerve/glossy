@@ -14,9 +14,15 @@
 
 <template>
   <h1>course name: {{ course.name }}</h1>
-  <router-link to="newquiz">
-    <button>Test</button>
-  </router-link>
+  <template v-for="quiz in course.quizzes" :key="quiz.id">
+    <div>
+      <router-link
+        :to="`/student/${route.params.userid}/course/${route.params.courseid}/quiz/${quiz.id}/`"
+      >
+        <h1>{{ quiz.title }}</h1>
+      </router-link>
+    </div>
+  </template>
 </template>
 
 <style scoped></style>
