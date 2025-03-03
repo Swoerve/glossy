@@ -9,5 +9,12 @@
   }
 </script>
 <template>
-  <h1>{{ teacher.name }}</h1>
+  <h1>{{ teacher.name }}s profil</h1>
 </template>
+
+<style scoped>
+  h1 {
+    font-size: 3em;
+    margin-block: 0.67em;
+  }
+</style>
