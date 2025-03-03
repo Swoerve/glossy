@@ -49,7 +49,7 @@
         setSessionStorage("loggedin", user) //Kollar att användaren är inloggad
         updateLocalStorage("teachers", user) //Lägger till konton i localStorage
 
-        router.push(`/teacher/${user.id}`) //Gör att knappen skickar dig till lärarvyn
+        router.push(`/teacher/${user.id}/`) //Gör att knappen skickar dig till lärarvyn
       } else if (role.value === "student") {
         user.id = v4()
         user.name = name.value
@@ -58,7 +58,7 @@
         setSessionStorage("loggedin", user)
         updateLocalStorage("students", user)
 
-        router.push(`/student/${user.id}`) // Gör att knappen skickar användren till elevvyn
+        router.push(`/student/${user.id}/`) // Gör att knappen skickar användren till elevvyn
       }
     } else {
       alert("Fyll i alla fält och acceptera villkoren")

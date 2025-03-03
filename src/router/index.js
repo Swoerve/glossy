@@ -9,6 +9,8 @@ import QuizView from "@/views/QuizView.vue"
 import CreateCourseView from "@/views/CreateCourseView.vue"
 import TeacherCourseView from "@/views/TeacherCourseView.vue"
 import StudentCourseView from "@/views/StudentCourseView.vue"
+import StudentProfileView from "@/views/StudentProfileView.vue"
+import TeacherProfileView from "@/views/TeacherProfileView.vue"
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -38,13 +40,18 @@ const router = createRouter({
     // Student routes
     {
       path: "/student/:studentid",
-      name: "studentview",
+      name: "accountstudentview",
       component: AccountStudentView
     },
     {
       path: "/student/:studentid/course/:courseid",
       name: "studentcourse",
       component: StudentCourseView
+    },
+    {
+      path: "/student/:studentid/studentprofileview",
+      name: "studentprofile",
+      component: StudentProfileView
     },
     {
       path: "/student/:studentid/course/:courseid/quiz/:quizid",
@@ -71,6 +78,11 @@ const router = createRouter({
       path: "/createcourseview",
       name: "createcourseview",
       component: CreateCourseView
+    },
+    {
+      path: "/teacher/:userid/teacherprofileview",
+      name: "teacherprofile",
+      component: TeacherProfileView
     }
   ]
 })
