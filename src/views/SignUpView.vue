@@ -1,5 +1,9 @@
 <script setup>
-  import { setSessionStorage, setLocalStorage } from "@/storageHandler"
+  import {
+    setSessionStorage,
+    setLocalStorage,
+    getLocalStorage
+  } from "@/storageHandler"
   import { updateLocalStorage, updateSessionStorage } from "@/storageHandler"
 
   import { v4 } from "uuid"
@@ -15,18 +19,52 @@
   const checked = ref(false)
   const name = ref(null)
 
+  const errorMail = ref("must be a valid email")
+  const showErrorMail = ref(false)
+
   function isValidEmail() {
+    let condition = {
+      invalidEmail: false,
+      existingEmail: false
+    }
     let regex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/
     if (regex.test(email.value)) {
-      return true
+      condition.invalidEmail = true
     } else {
-      return false
+      condition.invalidEmail = false
+      errorMail.value = "must be a valid email"
     }
+    if (role.value === "teacher") {
+      let users = getLocalStorage("teachers")
+      if (users) {
+        users.forEach((user) => {
+          if (email.value === user.email) {
+            condition.existingEmail = true
+          }
+        })
+      }
+    } else {
+      let users = getLocalStorage("students")
+      if (users) {
+        users.forEach((user) => {
+          if (email.value === user.email) {
+            condition.existingEmail = true
+          }
+        })
+      }
+    }
+    return condition
   }
 
   //Kollar så att alla fält är ifyllda och checkar om värdet från select element är lärare eller elev
   function register() {
-    if (!isValidEmail()) {
+    let check = isValidEmail()
+    if (!check.invalidEmail) {
+      return null
+    }
+    if (check.existingEmail) {
+      errorMail.value = "This email is already associated with an account"
+      showErrorMail.value = true
       return null
     }
 
@@ -80,7 +118,13 @@
         placeholder="Skriv in din skolmail här"
         class="signup-input"
       /><br />
-      <p v-show="!isValidEmail() && email.length > 0">hej</p>
+      <p
+        v-show="
+          (!isValidEmail().invalidEmail && email.length > 0) || showErrorMail
+        "
+      >
+        {{ errorMail }}
+      </p>
       <p>Namn: {{ name }}</p>
       <input
         v-model="name"
