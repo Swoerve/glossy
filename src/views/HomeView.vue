@@ -28,8 +28,9 @@
   }
 
   .picture {
-    width: 500px;
-    height: auto;
+    width: auto;
+    height: calc(40vh - 50px);
+    margin-left: 20px;
   }
 
   .login {
