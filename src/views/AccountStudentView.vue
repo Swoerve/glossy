@@ -9,6 +9,7 @@
     replaceSessionStorage
   } from "@/storageHandler"
   import { useRoute } from "vue-router"
+  import gCard from "@/components/g-card.vue"
 
   const route = useRoute()
   const showSettings = ref(null)
@@ -70,6 +71,7 @@
         You aren't part of any courses, ask your teacher for a course code
       </h1>
     </template>
+    <g-card title="test" :height="150" />
     <input type="text" name="" id="" v-model="cCode" />
     <button @click="joinCourse()">Join course</button>
   </section>
