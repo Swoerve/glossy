@@ -15,12 +15,7 @@ const handleClick = () => {
   <div class="homepage">
     <img src="../assets/glossy.png" alt="logo" class="picture" />
     <h1>Välkommen!</h1>
-    <router-link to="/login">
-      <button class="loginbutton login">Logga in</button>
-    </router-link>
-    <router-link to="/signupview">
-      <button class="register login">Registrera dig</button>
-    </router-link>
+    <Button label="Logga in" color="btn-secondary" :to="{ name: 'loginview'}"></Button>
     <Button label="Registrera dig" color="btn-primary" :to="{ name: 'signupview'}"></Button>
   </div>
   </template>
