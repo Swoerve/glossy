@@ -5,6 +5,7 @@
   import { useRoute, useRouter } from "vue-router"
 
   const route = useRoute()
+  const router = useRouter()
   const course = ref(null)
   course.value = getLocalStorage("courses").filter((obj) => {
     return obj.id === route.params.courseid
@@ -52,6 +53,9 @@
       }
     })
     setLocalStorage("courses", courses)
+    router.push(
+      `/teacher/${route.params.userid}/course/${route.params.courseid}/`
+    )
   }
 </script>
 
