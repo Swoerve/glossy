@@ -1,5 +1,6 @@
 <script setup>
   import { getLocalStorage, setLocalStorage } from "@/storageHandler"
+  import { v4 } from "uuid"
   import { ref } from "vue"
   import { useRoute, useRouter } from "vue-router"
 
@@ -15,6 +16,7 @@
   // Quiz object
   const quiz = ref({
     title: "",
+    id: v4(),
     difficulty: 1,
     questions: [
       {

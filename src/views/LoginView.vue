@@ -22,7 +22,7 @@
       })
 
       setSessionStorage("loggedin", filtered[0])
-      router.push(`/teacher/${filtered[0].id}`)
+      router.push(`/teacher/${filtered[0].id}/`)
     } else {
       let students = getLocalStorage("students")
 
@@ -35,7 +35,7 @@
       })
 
       setSessionStorage("loggedin", filtered[0])
-      router.push(`/student/${filtered[0].id}`)
+      router.push(`/student/${filtered[0].id}/`)
     }
   }
 </script>

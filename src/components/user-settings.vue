@@ -1,15 +1,15 @@
 <script setup>
-  import { ref } from 'vue'
-  import { defineProps } from 'vue'
-  import { defineEmits } from 'vue'
+  import { ref } from "vue"
+  import { defineProps } from "vue"
+  import { defineEmits } from "vue"
 
   const props = defineProps({
     isOpen: Boolean
   })
 
-  const emit = defineEmits(['close'])
+  const emit = defineEmits(["close"])
   function closeSettings() {
-    emit('close')
+    emit("close")
   }
 
   const volume = ref(50)
@@ -35,8 +35,7 @@
             @input="changeVolume"
           />
         </div>
-        <div />
-        <button @click="closeSettings" />
+        <button @click="closeSettings">Spara</button>
       </section>
     </div>
   </div>
@@ -44,6 +43,11 @@
 
 <style scoped>
   .settings-container {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    right: 30%;
+    margin: 20px 20px;
     width: 320px;
     padding: 20px;
     border-radius: 12px;
@@ -51,6 +55,7 @@
     box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
     text-align: center;
     transition: all 0.3s ease-in-out;
+    transform: translate(-50%, -50%);
   }
 
   .settings-container:hover {
@@ -78,9 +83,8 @@
     color: #555;
   }
 
-  input[type='range'] {
+  input[type="range"] {
     width: 90%;
-    -webkit-appearance: none;
     appearance: none;
     height: 6px;
     background: #9667e0;
@@ -89,7 +93,7 @@
     transition: background 0.3s ease-in-out;
   }
 
-  input[type='range']::-webkit-slider-thumb {
+  input[type="range"]::-webkit-slider-thumb {
     -webkit-appearance: none;
     appearance: none;
     width: 16px;
@@ -101,11 +105,11 @@
     transition: transform 0.2s;
   }
 
-  input[type='range']::-webkit-slider-thumb:hover {
+  input[type="range"]::-webkit-slider-thumb:hover {
     transform: scale(1.2);
   }
 
-  input[type='range']:hover {
+  input[type="range"]:hover {
     background: #7e4dcf;
   }
 </style>

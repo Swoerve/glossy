@@ -8,10 +8,14 @@ import CreateQuizView from "@/views/CreateQuizView.vue"
 import QuizView from "@/views/QuizView.vue"
 import CreateCourseView from "@/views/CreateCourseView.vue"
 import TeacherCourseView from "@/views/TeacherCourseView.vue"
+import StudentCourseView from "@/views/StudentCourseView.vue"
+import StudentProfileView from "@/views/StudentProfileView.vue"
+import TeacherProfileView from "@/views/TeacherProfileView.vue"
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes: [
+    // Generic Routes
     {
       path: "/",
       name: "home",
@@ -29,19 +33,36 @@ const router = createRouter({
       component: LoginView
     },
     {
-      path: "/teacher/:userid",
-      name: "accountteacherview",
-      component: AccountTeacherView
-    },
-    {
       path: "/signupview",
       name: "signupview",
       component: SignUpView
     },
+    // Student routes
     {
-      path: "/student/:studentid",
-      name: "studentview",
+      path: "/student/:userid",
+      name: "accountstudentview",
       component: AccountStudentView
+    },
+    {
+      path: "/student/:userid/course/:courseid",
+      name: "studentcourse",
+      component: StudentCourseView
+    },
+    {
+      path: "/student/:userid/studentprofileview",
+      name: "studentprofile",
+      component: StudentProfileView
+    },
+    {
+      path: "/student/:userid/course/:courseid/quiz/:quizid",
+      name: "quizview",
+      component: QuizView
+    },
+    // Teacher routes
+    {
+      path: "/teacher/:userid",
+      name: "accountteacherview",
+      component: AccountTeacherView
     },
     {
       path: "/teacher/:userid/course/:courseid",
@@ -54,14 +75,14 @@ const router = createRouter({
       component: CreateQuizView
     },
     {
-      path: "/accountstudentview/quizview",
-      name: "quizview",
-      component: QuizView
-    },
-    {
       path: "/createcourseview",
       name: "createcourseview",
       component: CreateCourseView
+    },
+    {
+      path: "/teacher/:userid/teacherprofileview",
+      name: "teacherprofile",
+      component: TeacherProfileView
     }
   ]
 })

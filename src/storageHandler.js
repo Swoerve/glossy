@@ -26,6 +26,15 @@ export function updateLocalStorage(key, object) {
   }
 }
 
+export function replaceLocalStorage(key, object) {
+  let currentStorage = getLocalStorage(key)
+  let ind = currentStorage.findIndex((obj) => {
+    return obj.id === object.id
+  })
+  currentStorage[ind] = object
+  setLocalStorage(key, currentStorage)
+}
+
 export function setSessionStorage(key, object) {
   let stringified = JSON.stringify(object)
   sessionStorage.setItem(key, stringified)
@@ -47,4 +56,17 @@ export function updateSessionStorage(key, object) {
     temp.push(object)
     setSessionStorage(key, temp)
   }
+}
+
+export function replaceSessionStorage(key, object) {
+  let currentStorage = getSessionStorage(key)
+  let ind = currentStorage.findIndex((obj) => {
+    return obj.id === object.id
+  })
+  currentStorage[ind] = object
+  setSessionStorage(key, currentStorage)
+}
+
+export function replaceLogin(object) {
+  setSessionStorage("loggedin", object)
 }

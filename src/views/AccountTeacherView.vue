@@ -26,17 +26,9 @@
 </script>
 
 <template>
-  <nav id="idk">
-    <router-link to="/test">
-      <button class="account-button">Statistik</button>
-    </router-link>
-
-    <!-- Detta gör att en settings ruta dyker upp-->
-    <button @click="showSettings = true" class="account-button">
-      Inställningar
-    </button>
-    <Settings :is-open="showSettings" @close="showSettings = false" />
-  </nav>
+  <!-- <router-link to="/test">
+    <button class="account-button">Statistik</button>
+  </router-link> -->
 
   <h1 id="h1">Välkommen {{ teacher.name }}</h1>
 

@@ -1,18 +1,15 @@
 <script setup>
   import { ref } from "vue"
   import { getSessionStorage } from "@/storageHandler"
-  import { RouterLink } from "vue-router"
 
-  const student = ref(null)
+  const teacher = ref(null)
 
   if (getSessionStorage("loggedin")) {
-    student.value = getSessionStorage("loggedin")
+    teacher.value = getSessionStorage("loggedin")
   }
 </script>
-
 <template>
-  <h1>{{ student.name }}s profil</h1>
-  <p>hej</p>
+  <h1>{{ teacher.name }}s profil</h1>
 </template>
 
 <style scoped>

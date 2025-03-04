@@ -1,5 +1,9 @@
 <script setup>
-  import { setSessionStorage, setLocalStorage } from "@/storageHandler"
+  import {
+    setSessionStorage,
+    setLocalStorage,
+    getLocalStorage
+  } from "@/storageHandler"
   import { updateLocalStorage, updateSessionStorage } from "@/storageHandler"
 
   import { v4 } from "uuid"
@@ -15,18 +19,52 @@
   const checked = ref(false)
   const name = ref(null)
 
+  const errorMail = ref("must be a valid email")
+  const showErrorMail = ref(false)
+
   function isValidEmail() {
+    let condition = {
+      invalidEmail: false,
+      existingEmail: false
+    }
     let regex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/
     if (regex.test(email.value)) {
-      return true
+      condition.invalidEmail = true
     } else {
-      return false
+      condition.invalidEmail = false
+      errorMail.value = "must be a valid email"
     }
+    if (role.value === "teacher") {
+      let users = getLocalStorage("teachers")
+      if (users) {
+        users.forEach((user) => {
+          if (email.value === user.email) {
+            condition.existingEmail = true
+          }
+        })
+      }
+    } else {
+      let users = getLocalStorage("students")
+      if (users) {
+        users.forEach((user) => {
+          if (email.value === user.email) {
+            condition.existingEmail = true
+          }
+        })
+      }
+    }
+    return condition
   }
 
   //Kollar så att alla fält är ifyllda och checkar om värdet från select element är lärare eller elev
   function register() {
-    if (!isValidEmail()) {
+    let check = isValidEmail()
+    if (!check.invalidEmail) {
+      return null
+    }
+    if (check.existingEmail) {
+      errorMail.value = "This email is already associated with an account"
+      showErrorMail.value = true
       return null
     }
 
@@ -49,7 +87,7 @@
         setSessionStorage("loggedin", user) //Kollar att användaren är inloggad
         updateLocalStorage("teachers", user) //Lägger till konton i localStorage
 
-        router.push(`/teacher/${user.id}`) //Gör att knappen skickar dig till lärarvyn
+        router.push(`/teacher/${user.id}/`) //Gör att knappen skickar dig till lärarvyn
       } else if (role.value === "student") {
         user.id = v4()
         user.name = name.value
@@ -58,7 +96,7 @@
         setSessionStorage("loggedin", user)
         updateLocalStorage("students", user)
 
-        router.push(`/student/${user.id}`) // Gör att knappen skickar användren till elevvyn
+        router.push(`/student/${user.id}/`) // Gör att knappen skickar användren till elevvyn
       }
     } else {
       alert("Fyll i alla fält och acceptera villkoren")
@@ -73,45 +111,62 @@
   <div class="signup-container">
     <div id="signup">
       <h1 id="header">Registrera dig</h1>
-      <p>E-mail: {{ email }}</p>
+      <label for="email">E-mail: {{ email }}</label>
       <input
         type="email"
         v-model="email"
+        id="email"
+        name="email"
         placeholder="Skriv in din skolmail här"
         class="signup-input"
       /><br />
-      <p v-show="!isValidEmail() && email.length > 0">hej</p>
-      <p>Namn: {{ name }}</p>
+      <p
+        style="color: red"
+        v-show="
+          (!isValidEmail().invalidEmail && email.length > 0) || showErrorMail
+        "
+      >
+        {{ errorMail }}
+      </p>
+      <label for="name">Namn: {{ name }}</label>
       <input
         v-model="name"
         placeholder="John Doe"
+        id="name"
+        name="name"
         class="signup-input"
         type="text"
       /><br />
-      <p>Lösenord: {{ password }}</p>
+      <label for="password">Lösenord: {{ password }}</label>
       <input
         v-model="password"
+        id="password"
+        name="password"
         placeholder="Ge aldrig ut ditt lösenord"
         class="signup-input"
         type="password"
       /><br />
-      <p>Välj din roll:</p>
-      <select v-model="role" class="signup-input">
+      <label for="role">Välj din roll:</label>
+      <select v-model="role" id="role" name="role" class="signup-input">
         <option value="teacher">Lärare</option>
         <option value="student">Elev</option></select
       ><br />
 
-      <p v-if="role === 'Student'">Klasskod: {{ classCode }}</p>
+      <label for="classcode" v-if="role === 'Student'"
+        >Klasskod: {{ classCode }}</label
+      >
       <input
         v-if="role === 'Student'"
         v-model="classCode"
+        id="classcode"
+        name="classcode"
         placeholder="Skriv in din klasskod här"
         class="signup-input"
       /><br />
-      <p>Jag accepterar villkoren✅</p>
-      <a href="https://www.google.se/?hl=sv">Villkor</a>
-      <label id="label" for="terms">checkbox</label>
-      <input type="checkbox" id="terms" v-model="checked" />
+      <label id="label" for="terms"
+        ><input type="checkbox" id="terms" v-model="checked" />Jag accepterar
+        <a href="https://www.google.se/?hl=sv">Villkoren</a></label
+      >
       <button @click="register" id="signup-button">Registrera dig</button>
       <router-link to="/">
         <button class="back">Tillbaka</button>
@@ -132,15 +187,15 @@
   }
 
   .logo {
-    width: 500px;
-    height: auto;
+    width: auto;
+    height: calc(40vh - 50px);
   }
 
   .signup-container {
     display: flex;
     justify-content: center;
     align-items: center;
-    min-height: 100vh;
+    min-height: calc(60vh - 50px);
     width: 100%;
     color: black;
   }
@@ -162,11 +217,6 @@
     border: 0.5px solid #9667e0;
   }
 
-  #terms {
-    display: flex;
-    align-items: flex-start;
-  }
-
   #signup-button {
     height: 40px;
     color: white;
@@ -184,6 +234,19 @@
   }
 
   #label {
-    display: none;
+    display: block;
+    padding-left: 15px;
+    text-indent: -15px;
+  }
+
+  #terms {
+    width: 13px;
+    height: 13px;
+    padding: 0;
+    margin-left: 0px;
+  }
+
+  br {
+    margin: 10px 0px;
   }
 </style>

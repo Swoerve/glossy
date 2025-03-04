@@ -1,57 +1,77 @@
 <script setup>
-  import { ref } from 'vue'
-  import Settings from '@/components/user-settings.vue'
-  import { getLocalStorage, getSessionStorage } from '@/storageHandler'
+  import { ref } from "vue"
+  import Settings from "@/components/user-settings.vue"
+  import {
+    getLocalStorage,
+    getSessionStorage,
+    replaceLocalStorage,
+    replaceLogin,
+    replaceSessionStorage
+  } from "@/storageHandler"
+  import { useRoute } from "vue-router"
+
+  const route = useRoute()
   const showSettings = ref(null)
   const student = ref(null)
   const courses = ref(null)
+  const cCode = ref("")
 
-  if (getSessionStorage('loggedin')) {
-    student.value = getSessionStorage('loggedin')
+  if (getSessionStorage("loggedin")) {
+    student.value = getSessionStorage("loggedin")
+  }
+  loadCourses()
+  function loadCourses() {
+    if (getLocalStorage("courses")) {
+      let temp = getLocalStorage("courses")
+      let result = temp.filter((course) => {
+        return student.value.courses.includes(course.id)
+      })
+      courses.value = result
+    }
   }
 
-  if (getLocalStorage('courses')) {
-    let temp = getLocalStorage('courses')
-    let result = temp.filter((course) => {
-      return student.value.courses.includes(course.id)
+  function joinCourse() {
+    let course = getLocalStorage("courses").filter((obj) => {
+      return obj.code === cCode.value
     })
-    courses.value = result
+
+    student.value.courses.push(course[0].id)
+    replaceLocalStorage("students", student.value)
+    replaceLogin(student.value)
+    loadCourses()
   }
 </script>
 
 <template>
-  <nav id="navbar">
-    <router-link to="accountstudentview/quizview">
-      <button>Gå till quiz</button>
-    </router-link>
-
-    <router-link to="/studentprofileview">
-      <button>Profil</button>
-    </router-link>
-
-    <div>
-      <!-- Detta gör att en settings ruta dyker upp-->
-      <button @click="showSettings = true" class="account-button">
-        Inställningar
-      </button>
-      <Settings :is-open="showSettings" @close="showSettings = false" />
-    </div>
-  </nav>
-
   <h1>Hej {{ student.name }}!</h1>
 
   <section id="course-section">
     <h2>Kurser</h2>
     <template v-if="courses">
-      <template v-for="course in courses" :key="course.id">
-        <h1>{{ course.name }}</h1>
-      </template>
+      <div class="course-container">
+        <template v-for="course in courses" :key="course.id">
+          <div
+            class="course-card-container"
+            :style="`background-color: #${course.id.substr(0, 6)}`"
+          >
+            <router-link
+              :to="`/student/${route.params.userid}/course/${course.id}/`"
+            >
+              <div class="course-card">
+                <h1>{{ course.name }}</h1>
+              </div>
+            </router-link>
+          </div>
+        </template>
+      </div>
     </template>
     <template v-else>
       <h1>
         You aren't part of any courses, ask your teacher for a course code
       </h1>
     </template>
+    <input type="text" name="" id="" v-model="cCode" />
+    <button @click="joinCourse()">Join course</button>
   </section>
 </template>
 
@@ -80,21 +100,33 @@
     border-radius: 8px;
   }
 
-  ul {
+  .course-container {
+    width: 100%;
     display: flex;
-    flex-wrap: wrap;
-    padding: 0;
-    /* justify-content: center; */
-    list-style: none;
-    width: 100em;
+    gap: 1rem;
+    flex-direction: row;
+    margin-bottom: 1rem;
   }
 
-  li {
+  .course-card {
+    box-sizing: border-box;
+    border: black 2px solid;
+    border-radius: 10px;
+    height: 100px;
+    width: 200px;
+  }
+
+  .course-card h1 {
     background-color: white;
-    padding: 10px;
-    margin: 20px;
-    border-radius: 5px;
-    text-align: center;
-    min-width: 80px; /* Ensures a good size */
+    margin: 0;
+    padding-bottom: 5px;
+    border-bottom: black solid 2px;
+    border-radius: 10px 10px 0px 0px;
+  }
+
+  .course-card-container {
+    height: 100px;
+    width: 200px;
+    border-radius: 10px;
   }
 </style>
