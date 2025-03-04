@@ -46,17 +46,17 @@
 </template>
 
 <style scoped>
-  div {
-    height: v-bind("String(height) + 'px'");
-    width: v-bind("String(width) + 'px'");
+  * {
+    --height: v-bind("String(height) + 'px'");
+    --width: v-bind("String(width) + 'px'");
   }
 
   #course-card {
     box-sizing: border-box;
     border: black 2px solid;
     border-radius: 10px;
-    height: 100px;
-    width: 200px;
+    height: var(--height);
+    width: var(--width);
   }
 
   #course-card h1 {
@@ -67,9 +67,9 @@
     border-radius: 10px 10px 0px 0px;
   }
 
-  .course-card-container {
-    height: 100px;
-    width: 200px;
+  #course-card-container {
+    height: var(--height);
+    width: var(--width);
     border-radius: 10px;
   }
 </style>
