@@ -1,22 +1,13 @@
 <script setup>
-  import { ref, computed } from "vue"
-  import { RouterLink, RouterView } from "vue-router"
+  import { ref, computed, watchEffect } from "vue"
+  import { onBeforeRouteUpdate, RouterLink, RouterView } from "vue-router"
   import { useRoute } from "vue-router"
   import Settings from "@/components/user-settings.vue"
   import { getLocalStorage, getSessionStorage } from "./storageHandler"
 
   const showSettings = ref(null)
   const route = useRoute()
-
-  function seeIfLoggedin() {
-    // console.log("boohoo")
-    // console.log(getSessionStorage("loggedin"))
-    if (getSessionStorage("loggedin")) {
-      return true
-    } else {
-      return false
-    }
-  }
+  const isLoggedIn = ref(getSessionStorage("loggedin"))
 
   //Håller koll om det är lärare eller student i route
   const studentRoute = computed(() => route.name === "accountstudentview")
@@ -26,14 +17,39 @@
   const teacher = ref(getLocalStorage("teachers"))
   console.log(student)
 
+  function loadUserProfile() {}
+
+  onBeforeRouteUpdate(() => {
+    loadUserProfile()
+  })
+  // onBeforeRouteUpdate(() => {
+  //   isLoggedIn.value = getSessionStorage("loggedin")
+  //   teacher.value = getLocalStorage("teachers")
+  //   student.value = getLocalStorage("students")
+  //   console.log(isLoggedIn.value)
+  // })
+
+  // function seeIfLoggedin() {
+  //   let userPopUp = getSessionStorage("loggedin")
+  // console.log("boohoo")
+  // console.log(getSessionStorage("loggedin"))
+
+  //   if (userPopUp) {
+  //     return true
+  //   } else {
+  //     return false
+  //   }
+  // }
+
   function logOut() {
     sessionStorage.removeItem("loggedin")
+    isLoggedIn.value = false
   }
 </script>
 
 <template>
   <nav>
-    <div v-if="seeIfLoggedin()" class="profile-container">
+    <div v-if="isLoggedIn" class="profile-container">
       <i id="user" class="fa fa-user" />
       <ul class="user-menu">
         <!--La in en v-if som kollar om routern är för en elev och då visas
@@ -53,7 +69,7 @@
           <li>Profil</li>
         </router-link>
 
-        <router-link v-if="seeIfLoggedin()" @click="logOut" :to="`/`">
+        <router-link v-if="isLoggedIn" @click="logOut" :to="`/`">
           <li>Logga ut</li>
         </router-link>
       </ul>
