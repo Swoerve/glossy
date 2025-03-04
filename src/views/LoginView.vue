@@ -3,6 +3,7 @@
   import { ref } from "vue"
   import { useRouter } from "vue-router"
   import { RouterLink, RouterView } from "vue-router"
+  import Button from '../components/buttonComponent.vue'
 
   const router = useRouter()
   const email = ref("")
@@ -56,13 +57,8 @@
       v-model="password"
     />
 
-    <button @click="login('student')" class="login-button login-student-button">
-      Logga in som elev
-    </button>
-
-    <button @click="login('teacher')" class="login-button login-teacher-button">
-      Logga in som lärare
-    </button>
+    <Button label="Logga in som elev" color="btn-secondary" @click="login('student')"></Button>
+    <Button label="Logga in som lärare" color="btn-primary" @click="login('teacher')"></Button>
 
     <router-link to="/">
       <button class="back">Tillbaka</button>

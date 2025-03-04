@@ -1,24 +1,29 @@
-<!-- <script setup>
+<script setup>
 
+import Button from '../components/buttonComponent.vue'
+import SignUpView from './SignUpView.vue';
 
-</script> -->
+const handleClick = () => {
+  if (!isRouterLink.value) {
+    emit('click');
+  }
+};
+
+</script> 
 
 <template>
   <div class="homepage">
     <img src="../assets/glossy.png" alt="logo" class="picture" />
     <h1>Välkommen!</h1>
-    <router-link to="/login">
-      <button class="loginbutton login">Logga in</button>
-    </router-link>
-    <router-link to="/signupview">
-      <button class="register login">Registrera dig</button>
-    </router-link>
+    <Button label="Logga in" color="btn-secondary" :to="{ name: 'loginview'}"></Button>
+    <Button label="Registrera dig" color="btn-primary" :to="{ name: 'signupview'}"></Button>
   </div>
-</template>
+  </template>
 
 <style>
-  body {
+  body {  
     background-image: url(../assets/wallpaper.png);
+    background-size: cover;
   }
 
   .homepage {
@@ -49,5 +54,9 @@
   .register {
     background-color: #9667e0;
     border: 0.5px solid #d4bbfc;
+  }
+
+  h1 {
+    color: white;
   }
 </style>
