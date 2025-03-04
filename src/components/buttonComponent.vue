@@ -13,8 +13,6 @@ defineEmits(['click'])
 
 const isRouterLink = computed(() => !!props.to)
 
-
-
 </script>
 
 <template>
@@ -37,6 +35,7 @@ const isRouterLink = computed(() => !!props.to)
     border: 0.5px solid #d4bbfc;
     border-radius: 4px;
     width: 170px;
+    margin-top: 5px;
 }
 
 .btn-secondary {
@@ -45,6 +44,8 @@ const isRouterLink = computed(() => !!props.to)
     background-color: #d4bbfc;
     border: 0.5px solid #9667e0;
     border-radius: 4px;
+    width: 170px;
+    margin-top: 5px;
 }
 
 </style>
