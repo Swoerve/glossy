@@ -19,13 +19,15 @@
   if (getSessionStorage("loggedin")) {
     student.value = getSessionStorage("loggedin")
   }
-
-  if (getLocalStorage("courses")) {
-    let temp = getLocalStorage("courses")
-    let result = temp.filter((course) => {
-      return student.value.courses.includes(course.id)
-    })
-    courses.value = result
+  loadCourses()
+  function loadCourses() {
+    if (getLocalStorage("courses")) {
+      let temp = getLocalStorage("courses")
+      let result = temp.filter((course) => {
+        return student.value.courses.includes(course.id)
+      })
+      courses.value = result
+    }
   }
 
   function joinCourse() {
@@ -36,6 +38,7 @@
     student.value.courses.push(course[0].id)
     replaceLocalStorage("students", student.value)
     replaceLogin(student.value)
+    loadCourses()
   }
 </script>
 
@@ -45,20 +48,22 @@
   <section id="course-section">
     <h2>Kurser</h2>
     <template v-if="courses">
-      <template v-for="course in courses" :key="course.id">
-        <div
-          class="course-card-container"
-          :style="`background-color: #${course.id.substr(0, 6)}`"
-        >
-          <router-link
-            :to="`/student/${route.params.userid}/course/${course.id}/`"
+      <div class="course-container">
+        <template v-for="course in courses" :key="course.id">
+          <div
+            class="course-card-container"
+            :style="`background-color: #${course.id.substr(0, 6)}`"
           >
-            <div class="course-card">
-              <h1>{{ course.name }}</h1>
-            </div>
-          </router-link>
-        </div>
-      </template>
+            <router-link
+              :to="`/student/${route.params.userid}/course/${course.id}/`"
+            >
+              <div class="course-card">
+                <h1>{{ course.name }}</h1>
+              </div>
+            </router-link>
+          </div>
+        </template>
+      </div>
     </template>
     <template v-else>
       <h1>
@@ -94,8 +99,18 @@
     padding: 10px;
     border-radius: 8px;
   }
+
+  .course-container {
+    width: 100%;
+    display: flex;
+    gap: 1rem;
+    flex-direction: row;
+    margin-bottom: 1rem;
+  }
+
   .course-card {
-    border: black 1px solid;
+    box-sizing: border-box;
+    border: black 2px solid;
     border-radius: 10px;
     height: 100px;
     width: 200px;
@@ -105,12 +120,13 @@
     background-color: white;
     margin: 0;
     padding-bottom: 5px;
-    border-bottom: black solid 1px;
+    border-bottom: black solid 2px;
     border-radius: 10px 10px 0px 0px;
   }
 
   .course-card-container {
     height: 100px;
     width: 200px;
+    border-radius: 10px;
   }
 </style>
