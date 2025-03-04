@@ -8,6 +8,16 @@
   const showSettings = ref(null)
   const route = useRoute()
 
+  function seeIfLoggedin() {
+    // console.log("boohoo")
+    // console.log(getSessionStorage("loggedin"))
+    if (getSessionStorage("loggedin")) {
+      return true
+    } else {
+      return false
+    }
+  }
+
   //Håller koll om det är lärare eller student i route
   const studentRoute = computed(() => route.name === "accountstudentview")
   const teacherRoute = computed(() => route.name === "accountteacherview")
@@ -15,20 +25,15 @@
   const student = ref(getLocalStorage("students"))
   const teacher = ref(getLocalStorage("teachers"))
   console.log(student)
-  console.log(`${student.value}`)
 
-  // function showList() {
-  //   showDropDown.value = true
-  // }
-
-  // function hideList() {
-  //   showDropDown.value = false
-  // }
+  function logOut() {
+    sessionStorage.removeItem("loggedin")
+  }
 </script>
 
 <template>
   <nav>
-    <div v-if="studentRoute || teacherRoute" class="profile-container">
+    <div v-if="seeIfLoggedin()" class="profile-container">
       <i id="user" class="fa fa-user" />
       <ul class="user-menu">
         <!--La in en v-if som kollar om routern är för en elev och då visas
@@ -48,7 +53,7 @@
           <li>Profil</li>
         </router-link>
 
-        <router-link v-if="studentRoute || teacherRoute" :to="`/`">
+        <router-link v-if="seeIfLoggedin()" @click="logOut" :to="`/`">
           <li>Logga ut</li>
         </router-link>
       </ul>
