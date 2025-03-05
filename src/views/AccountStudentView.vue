@@ -44,7 +44,7 @@
 </script>
 
 <template>
-  <h1>Hej {{ student.name }}!</h1>
+  <h1 class="greeting">Hej {{ student.name }}!</h1>
 
   <section id="course-section">
     <h2>Kurser</h2>
@@ -83,6 +83,10 @@
   #navbar {
     display: flex;
     justify-content: space-evenly;
+  }
+
+  .greeting {
+    color: #000000;
   }
 
   #course-section {

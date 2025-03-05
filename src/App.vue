@@ -1,5 +1,5 @@
 <script setup>
-  import { ref, computed, watchEffect } from "vue"
+  import { ref, computed, onMounted } from "vue"
   import { onBeforeRouteUpdate, RouterLink, RouterView } from "vue-router"
   import { useRoute } from "vue-router"
   import Settings from "@/components/user-settings.vue"
@@ -8,6 +8,7 @@
   const showSettings = ref(null)
   const route = useRoute()
   const isLoggedIn = ref(getSessionStorage("loggedin"))
+  const showProfile = computed(() => isLoggedIn.value)
 
   //Håller koll om det är lärare eller student i route
   const studentRoute = computed(() => route.name === "accountstudentview")
@@ -17,7 +18,15 @@
   const teacher = ref(getLocalStorage("teachers"))
   console.log(student)
 
-  function loadUserProfile() {}
+  function loadUserProfile() {
+    if (getSessionStorage("loggedin")) {
+      isLoggedIn.value = true
+    }
+  }
+
+  onMounted(() => {
+    loadUserProfile()
+  })
 
   onBeforeRouteUpdate(() => {
     loadUserProfile()
@@ -50,7 +59,7 @@
 <template>
   <nav>
     <div v-if="isLoggedIn" class="profile-container">
-      <i id="user" class="fa fa-user" />
+      <i v-if="(showProfile = true)" id="user" class="fa fa-user" />
       <ul class="user-menu">
         <!--La in en v-if som kollar om routern är för en elev och då visas
       profilknappen för elven-->
