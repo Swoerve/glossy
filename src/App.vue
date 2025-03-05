@@ -1,5 +1,5 @@
 <script setup>
-  import { ref, computed, onMounted } from "vue"
+  import { ref, computed, onMounted, watch } from "vue"
   import { onBeforeRouteUpdate, RouterLink, RouterView } from "vue-router"
   import { useRoute } from "vue-router"
   import Settings from "@/components/user-settings.vue"
@@ -7,7 +7,7 @@
 
   const showSettings = ref(null)
   const route = useRoute()
-  const isLoggedIn = ref(getSessionStorage("loggedin"))
+  const isLoggedIn = ref(false)
   const showProfile = computed(() => isLoggedIn.value)
 
   //Håller koll om det är lärare eller student i route
@@ -24,31 +24,11 @@
     }
   }
 
-  onMounted(() => {
+  // vue watcher that keeps track of route, whenever route changes, it calls loaduserProfile()
+  watch(route, (to, from) => {
+    //console.log("app watch route tick")
     loadUserProfile()
   })
-
-  onBeforeRouteUpdate(() => {
-    loadUserProfile()
-  })
-  // onBeforeRouteUpdate(() => {
-  //   isLoggedIn.value = getSessionStorage("loggedin")
-  //   teacher.value = getLocalStorage("teachers")
-  //   student.value = getLocalStorage("students")
-  //   console.log(isLoggedIn.value)
-  // })
-
-  // function seeIfLoggedin() {
-  //   let userPopUp = getSessionStorage("loggedin")
-  // console.log("boohoo")
-  // console.log(getSessionStorage("loggedin"))
-
-  //   if (userPopUp) {
-  //     return true
-  //   } else {
-  //     return false
-  //   }
-  // }
 
   function logOut() {
     sessionStorage.removeItem("loggedin")
