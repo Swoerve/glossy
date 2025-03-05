@@ -9,6 +9,9 @@
   const route = useRoute()
   const isLoggedIn = ref(false)
   const showProfile = computed(() => isLoggedIn.value)
+  const showHomeButton = computed(() => {
+    return !["/AccountStudentView", "AccountTeacherView"].includes(route.name)
+  })
 
   //Håller koll om det är lärare eller student i route
   const studentRoute = computed(() => route.name === "accountstudentview")
@@ -38,6 +41,21 @@
 
 <template>
   <nav>
+    <div v-if="showHomeButton">
+      <router-link
+        v-if="student && isLoggedIn"
+        :to="`/student/${route.params.userid}`"
+      >
+        <i id="home" class="fa fa-home"
+      /></router-link>
+
+      <router-link
+        v-if="teacher && isLoggedIn"
+        :to="`/teacher/${route.params.userid}`"
+      >
+        <i id="home" class="fa fa-home" />
+      </router-link>
+    </div>
     <div v-if="isLoggedIn" class="profile-container">
       <i v-if="(showProfile = true)" id="user" class="fa fa-user" />
       <ul class="user-menu">
@@ -64,10 +82,9 @@
       </ul>
     </div>
 
-    <div>
-      <button class="navbar-button" @click="showSettings = true">
-        Inställningar
-      </button>
+    <div @click="showSettings = true">
+      <i id="settings" class="fa fa-cog" />
+
       <Settings :is-open="showSettings" @close="showSettings = false" />
     </div>
   </nav>
@@ -91,6 +108,27 @@
     align-items: center;
   }
 
+  #settings {
+    font-size: 1.7em;
+    margin-right: 0.6em;
+    margin-left: 0.45em;
+    color: #fcfbfb;
+  }
+
+  #settings:hover {
+    color: #141313;
+  }
+
+  #home {
+    font-size: 1.87em;
+    color: #fcfbfb;
+    margin-left: 0.45em;
+  }
+
+  #home:hover {
+    color: #141313;
+  }
+
   .profile-container {
     position: relative;
     display: inline-block;
@@ -98,6 +136,12 @@
 
   #user {
     font-size: 1.87em;
+    color: #fcfbfb;
+    margin-left: 0.45em;
+  }
+
+  #user:hover {
+    color: #141313;
   }
 
   .user-menu {
@@ -130,20 +174,5 @@
   .profile-container:hover .user-menu {
     visibility: visible;
     opacity: 1;
-  }
-
-  .navbar-button {
-    color: #ffffff;
-    font-size: 20px;
-    font-family: "Times New Roman", Times, serif;
-    font-weight: 300;
-    background-color: #5c04660e;
-    padding: 12px;
-    text-decoration: none;
-    border: none;
-  }
-
-  .navbar-button:hover {
-    color: #3e1e40;
   }
 </style>
