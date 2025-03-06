@@ -36,10 +36,14 @@
         <template v-for="course in courses" :key="course.id">
           <g-card
             :title="course.name"
-            :width="100"
             :bg="course.id.substr(0, 6)"
             :route-to="`/teacher/${route.params.userid}/course/${course.id}/`"
+            right-button
+            left-button="left"
             link
+            @lclick="console.log('view!')"
+            @mclick="console.log('edit!')"
+            @rclick="console.log('delete!')"
           />
         </template>
       </div>
