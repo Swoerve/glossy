@@ -1,31 +1,32 @@
 <script setup>
+  import Button from "../components/buttonComponent.vue"
+  import SignUpView from "./SignUpView.vue"
 
-import Button from '../components/buttonComponent.vue'
-import SignUpView from './SignUpView.vue';
-
-const handleClick = () => {
-  if (!isRouterLink.value) {
-    emit('click');
+  const handleClick = () => {
+    if (!isRouterLink.value) {
+      emit("click")
+    }
   }
-};
-
-</script> 
+</script>
 
 <template>
   <div class="homepage">
     <img src="../assets/glossy.png" alt="logo" class="picture" />
     <h1>Välkommen!</h1>
-    <Button label="Logga in" color="btn-secondary" :to="{ name: 'loginview'}"></Button>
-    <Button label="Registrera dig" color="btn-primary" :to="{ name: 'signupview'}"></Button>
+    <Button
+      label="Logga in"
+      color="btn-secondary"
+      :to="{ name: 'loginview' }"
+    />
+    <Button
+      label="Registrera dig"
+      color="btn-primary"
+      :to="{ name: 'signupview' }"
+    />
   </div>
-  </template>
+</template>
 
 <style>
-  body {  
-    background-image: url(../assets/wallpaper.png);
-    background-size: cover;
-  }
-
   .homepage {
     display: flex;
     flex-direction: column;
