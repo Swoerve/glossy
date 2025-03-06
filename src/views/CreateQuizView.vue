@@ -108,7 +108,7 @@
               :value="aIndex"
               v-model="question.correctAnswer"
               :id="aIndex"
-              name="correct"
+              :name="`${qIndex}${aIndex} `"
             />
           </template>
         </div>

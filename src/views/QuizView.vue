@@ -1,6 +1,12 @@
 <script setup>
   import Question from "@/components/quiz/quiz-question.vue"
-  import { getLocalStorage } from "@/storageHandler"
+  import {
+    getLocalStorage,
+    setLocalStorage,
+    setSessionStorage,
+    updateLocalStorage
+  } from "@/storageHandler"
+  import { v4 } from "uuid"
   import { ref } from "vue"
   import { useRoute } from "vue-router"
 
@@ -60,12 +66,19 @@
   // adds the chosen answer to a list of answers where the index is related to the respective question
   // i.e. answer in index 0 is the answer chosen for question 1
   function addAnswer(n) {
+    // add answer to quizresult
     if (n[1] in answered.value) {
       answered.value[n[1]] = n[0]
     } else {
       answered.value[n[1]] = n[0]
     }
     console.log(answered.value)
+    // add answer to data statistic
+    if (newData.value.answers[n[1]]) {
+      newData.value.answers[n[1]].push(n[0])
+    } else {
+      newData.value.answers[n[1]] = [n[0]]
+    }
   }
 
   // end screen true or false variable
@@ -73,8 +86,35 @@
 
   // literally just makes endscreen true
   function switchToEndScreen() {
+    updateLocalStorage("statistics", newData.value)
     endScreen.value = true
   }
+
+  function tryCount() {
+    if (getLocalStorage("statistics")) {
+      let tries = getLocalStorage("statistics").filter((data) => {
+        console.log(data)
+        if (
+          data.courseid === course.id &&
+          data.quizid === quiz.value.id &&
+          data.studentid === route.params.userid
+        ) {
+          return data
+        }
+      })
+      return tries.length
+    }
+    return 0
+  }
+
+  const newData = ref({
+    id: v4(),
+    courseid: course.id,
+    quizid: quiz.value.id,
+    studentid: route.params.userid,
+    try: tryCount(),
+    answers: []
+  })
 </script>
 
 <!--

@@ -3,4 +3,7 @@
 body {
   margin: 0;
   font-family: "Inter";
+
+  background-image: url(../assets/wallpaper.png);
+  background-size: cover;
 }

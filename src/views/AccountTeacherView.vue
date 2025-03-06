@@ -38,7 +38,7 @@
             :title="course.name"
             :width="100"
             :bg="course.id.substr(0, 6)"
-            :route-to="`/student/${route.params.userid}/course/${course.id}/`"
+            :route-to="`/teacher/${route.params.userid}/course/${course.id}/`"
             link
           />
         </template>
@@ -47,7 +47,7 @@
     <template v-else>
       <h1>Du har inga kurser inlagda</h1>
     </template>
-    <router-link to="/createcourseview">
+    <router-link :to="`/teacher/${route.params.userid}/createcourseview`">
       <button class="account-button">Skapa en ny kurs (+)</button>
     </router-link>
   </section>
