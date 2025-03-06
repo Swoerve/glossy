@@ -26,7 +26,7 @@
   const showSettings = ref(false)
 </script>
 
-<template>
+<template id="main">
   <h1 id="h1">Välkommen {{ teacher.name }}</h1>
 
   <section id="course-section">
@@ -45,7 +45,7 @@
       </div>
     </template>
     <template v-else>
-      <h1>Du har inga kurser inlaggda</h1>
+      <h1>Du har inga kurser inlagda</h1>
     </template>
     <router-link :to="`/teacher/${route.params.userid}/createcourseview`">
       <button class="account-button">Skapa en ny kurs (+)</button>
@@ -66,7 +66,7 @@
   }
 
   #h1 {
-    color: #0d0d0d;
+    color: black;
     text-align: center;
   }
 
