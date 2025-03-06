@@ -26,11 +26,13 @@
   </div>
 </template>
 
-<style>
+<style scoped>
+
   .homepage {
     display: flex;
     flex-direction: column;
     align-items: center;
+    font-family: testfont;
   }
 
   .picture {
@@ -59,5 +61,6 @@
 
   h1 {
     color: white;
-  }
+}
+
 </style>
