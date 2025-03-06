@@ -74,10 +74,10 @@
     }
     console.log(answered.value)
     // add answer to data statistic
-    if (newData.value.answers[n[0]]) {
-      newData.value.answers[n[0]].push(n[1])
+    if (newData.value.answers[n[1]]) {
+      newData.value.answers[n[1]].push(n[0])
     } else {
-      newData[n[0]] = [n[1]]
+      newData.value.answers[n[1]] = [n[0]]
     }
   }
 
