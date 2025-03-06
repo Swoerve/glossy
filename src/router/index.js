@@ -94,12 +94,12 @@ const router = createRouter({
       component: CourseStatisticsView
     },
     {
-      path: "teacher/:userid/quizstatistics",
+      path: "/teacher/:userid/quizstatistics",
       name: "quizstats",
       component: QuizStatisticsView
     },
     {
-      path: "teacher/:userid/studentstatistics",
+      path: "/teacher/:userid/studentstatistics",
       name: "studentstats",
       component: StudentStatisticsView
     }
