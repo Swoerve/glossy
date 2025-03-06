@@ -1,5 +1,5 @@
 <script setup>
-  import { getLocalStorage } from "@/storageHandler"
+  import { getLocalStorage, setLocalStorage } from "@/storageHandler"
   import { ref } from "vue"
   import { useRoute } from "vue-router"
 
