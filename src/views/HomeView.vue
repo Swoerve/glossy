@@ -20,7 +20,7 @@ const handleClick = () => {
   </div>
   </template>
 
-<style>
+<style scoped>
   body {  
     background-image: url(../assets/wallpaper.png);
     background-size: cover;
@@ -30,6 +30,7 @@ const handleClick = () => {
     display: flex;
     flex-direction: column;
     align-items: center;
+    font-family: testfont;
   }
 
   .picture {
@@ -58,5 +59,6 @@ const handleClick = () => {
 
   h1 {
     color: white;
-  }
+}
+
 </style>

@@ -104,4 +104,9 @@
     flex-direction: row;
     margin-bottom: 1rem;
   }
+
+  h1 {
+    display: flex;
+    justify-content: center;
+  }
 </style>
