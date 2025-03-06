@@ -4,6 +4,7 @@
   import { getLocalStorage, getSessionStorage } from "@/storageHandler"
   import { updateLocalStorage, updateSessionStorage } from "@/storageHandler"
   import { useRoute } from "vue-router"
+  import gCard from "@/components/g-card.vue"
 
   const teacher = ref(null)
   const courses = ref(null)
@@ -26,22 +27,22 @@
 </script>
 
 <template>
-  <!-- <router-link to="/test">
-    <button class="account-button">Statistik</button>
-  </router-link> -->
-
   <h1 id="h1">Välkommen {{ teacher.name }}</h1>
 
   <section id="course-section">
     <h2>Dina kurser</h2>
     <template v-if="courses">
-      <template v-for="course in courses" :key="course.id">
-        <router-link
-          :to="`/teacher/${route.params.userid}/course/${course.id}/`"
-        >
-          <h3>{{ course.name }}</h3>
-        </router-link>
-      </template>
+      <div class="course-container">
+        <template v-for="course in courses" :key="course.id">
+          <g-card
+            :title="course.name"
+            :width="100"
+            :bg="course.id.substr(0, 6)"
+            :route-to="`/student/${route.params.userid}/course/${course.id}/`"
+            link
+          />
+        </template>
+      </div>
     </template>
     <template v-else>
       <h1>Du har inga kurser inlaggda</h1>
@@ -84,5 +85,13 @@
     background-color: #9667e0;
     border: 0.5px solid #d4bbfc;
     border-radius: 4px;
+  }
+
+  .course-container {
+    width: 100%;
+    display: flex;
+    gap: 1rem;
+    flex-direction: row;
+    margin-bottom: 1rem;
   }
 </style>

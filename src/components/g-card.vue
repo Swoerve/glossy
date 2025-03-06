@@ -1,6 +1,6 @@
 <script setup>
   import { ref } from "vue"
-  const { title } = defineProps({
+  const { title, link, routeTo, height, width, bg } = defineProps({
     title: {
       type: String,
       required: true
@@ -26,12 +26,13 @@
       default: "white"
     }
   })
+  console.log(bg)
 </script>
 
 <template>
   <template v-if="link">
-    <div>
-      <router-link>
+    <div class="course-card-container">
+      <router-link :to="routeTo">
         <div id="course-card">
           <h1>{{ title }}</h1>
         </div>
@@ -49,6 +50,7 @@
   * {
     --height: v-bind("String(height) + 'px'");
     --width: v-bind("String(width) + 'px'");
+    --bg: v-bind("'#' + bg");
   }
 
   #course-card {
@@ -57,10 +59,12 @@
     border-radius: 10px;
     height: var(--height);
     width: var(--width);
+    background-color: var(--bg);
   }
 
   #course-card h1 {
     background-color: white;
+    color: black;
     margin: 0;
     padding-bottom: 5px;
     border-bottom: black solid 2px;
@@ -71,5 +75,6 @@
     height: var(--height);
     width: var(--width);
     border-radius: 10px;
+    background-color: var(--bg);
   }
 </style>

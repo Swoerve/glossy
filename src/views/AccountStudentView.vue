@@ -44,25 +44,20 @@
 </script>
 
 <template>
-  <h1 class="greeting">Hej {{ student.name }}!</h1>
+  <h1>Hej {{ student.name }}!</h1>
 
   <section id="course-section">
     <h2>Kurser</h2>
     <template v-if="courses">
       <div class="course-container">
         <template v-for="course in courses" :key="course.id">
-          <div
-            class="course-card-container"
-            :style="`background-color: #${course.id.substr(0, 6)}`"
-          >
-            <router-link
-              :to="`/student/${route.params.userid}/course/${course.id}/`"
-            >
-              <div class="course-card">
-                <h1>{{ course.name }}</h1>
-              </div>
-            </router-link>
-          </div>
+          <g-card
+            :title="course.name"
+            :width="100"
+            :bg="course.id.substr(0, 6)"
+            :route-to="`/student/${route.params.userid}/course/${course.id}/`"
+            link
+          />
         </template>
       </div>
     </template>
@@ -83,10 +78,6 @@
   #navbar {
     display: flex;
     justify-content: space-evenly;
-  }
-
-  .greeting {
-    color: #000000;
   }
 
   #course-section {
@@ -112,27 +103,5 @@
     gap: 1rem;
     flex-direction: row;
     margin-bottom: 1rem;
-  }
-
-  .course-card {
-    box-sizing: border-box;
-    border: black 2px solid;
-    border-radius: 10px;
-    height: 100px;
-    width: 200px;
-  }
-
-  .course-card h1 {
-    background-color: white;
-    margin: 0;
-    padding-bottom: 5px;
-    border-bottom: black solid 2px;
-    border-radius: 10px 10px 0px 0px;
-  }
-
-  .course-card-container {
-    height: 100px;
-    width: 200px;
-    border-radius: 10px;
   }
 </style>
