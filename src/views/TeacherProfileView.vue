@@ -8,6 +8,7 @@
     teacher.value = getSessionStorage("loggedin")
   }
 </script>
+
 <template>
   <h1>{{ teacher.name }}s profil</h1>
 </template>

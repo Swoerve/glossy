@@ -65,7 +65,7 @@
       <h1 id="header">Skapa ny quiz for {{ course.name }}</h1>
       <p class="quiztext">Titel</p>
       <input
-        v-model="quiz.title"
+        v-model="quiz.title"  
         placeholder="Quiz 1 titel"
         class="quizbutton"
       />
