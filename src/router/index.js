@@ -11,6 +11,9 @@ import TeacherCourseView from "@/views/TeacherCourseView.vue"
 import StudentCourseView from "@/views/StudentCourseView.vue"
 import StudentProfileView from "@/views/StudentProfileView.vue"
 import TeacherProfileView from "@/views/TeacherProfileView.vue"
+import CourseStatisticsView from "@/views/statistics/CourseStatisticsView.vue"
+import QuizStatisticsView from "@/views/statistics/QuizStatisticsView.vue"
+import StudentStatisticsView from "@/views/statistics/StudentStatisticsView.vue"
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -83,6 +86,22 @@ const router = createRouter({
       path: "/teacher/:userid/teacherprofileview",
       name: "teacherprofile",
       component: TeacherProfileView
+    },
+    //Statistics Routes
+    {
+      path: "/teacher/:userid/coursestatistics",
+      name: "coursestats",
+      component: CourseStatisticsView
+    },
+    {
+      path: "teacher/:userid/quizstatistics",
+      name: "quizstats",
+      component: QuizStatisticsView
+    },
+    {
+      path: "teacher/:userid/studentstatistics",
+      name: "studentstats",
+      component: StudentStatisticsView
     }
   ]
 })
