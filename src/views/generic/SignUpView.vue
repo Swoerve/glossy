@@ -9,6 +9,7 @@
   import { v4 } from "uuid"
   import { ref } from "vue"
   import { useRouter } from "vue-router"
+  import logo from "@/assets/glossy.png"
 
   const router = useRouter()
 
@@ -106,7 +107,7 @@
 
 <template>
   <div class="logo-container">
-    <img src="../assets/glossy.png" alt="logo" class="logo" />
+    <img :src="logo" alt="logo" class="logo" />
   </div>
   <div class="signup-container">
     <div id="signup">

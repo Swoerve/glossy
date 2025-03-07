@@ -3,7 +3,12 @@
   import { ref } from "vue"
   import { useRouter } from "vue-router"
   import { RouterLink, RouterView } from "vue-router"
+<<<<<<< HEAD
   import Button from "../components/buttonComponent.vue"
+=======
+  import Button from "@/components/buttonComponent.vue"
+  import logo from "@/assets/glossy.png"
+>>>>>>> 7235d04aa1165827f03bf8df9635ac18516e24f0
 
   const router = useRouter()
   const email = ref("")
@@ -44,7 +49,7 @@
 <template>
   <main>
     <div class="logo-container">
-      <img src="../assets/glossy.png" alt="logo" class="logo" />
+      <img :src="logo" alt="logo" class="logo" />
     </div>
 
     <input type="email" name="" id="" placeholder="email" v-model="email" />
