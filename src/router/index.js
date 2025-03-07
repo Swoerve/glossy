@@ -89,18 +89,18 @@ const router = createRouter({
     },
     //Statistics Routes
     {
-      path: "/teacher/:userid/coursestatistics",
-      name: "coursestats",
+      path: "/teacher/:userid/course/:courseid/coursestatistics",
+      name: "coursestatistics",
       component: CourseStatisticsView
     },
     {
-      path: "/teacher/:userid/quizstatistics",
-      name: "quizstats",
+      path: "/teacher/:userid/course/:courseid/quiz/:quizid/quizstatistics",
+      name: "quizstatistics",
       component: QuizStatisticsView
     },
     {
-      path: "/teacher/:userid/studentstatistics",
-      name: "studentstats",
+      path: "/teacher/:userid/course/:courseid/:studentid/studentstatistics",
+      name: "studentstatistics",
       component: StudentStatisticsView
     }
   ]
