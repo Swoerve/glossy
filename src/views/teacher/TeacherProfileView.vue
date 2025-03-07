@@ -49,6 +49,7 @@
   <input type="file" id="img" name="img" accept="image/*" />
   <input type="submit" />
 
+  <!-- display email -->
   <p>E-mail: {{ teacher.email }}</p>
   <Button
   label="Ändra e-mail"
@@ -56,6 +57,7 @@
   @click="showEmailModal = true"
 />
 
+  <!-- display password -->
   <p>Lösenord: {{ teacher.password }}</p>
   <Button
   label="Ändra lösenord"
@@ -65,6 +67,7 @@
 
   <br />
 
+  <!-- setting  button -->
   <div>
     <Button
     label="Inställningar"
@@ -75,6 +78,7 @@
 
   <user-settings :is-open="showSettings" @close="showSettings = false" />
 
+  <!-- email modal -->
   <div v-if="showEmailModal" class="modal">
     <div class="modal-content">
       <h2>Ändra E-Mail</h2>
@@ -84,6 +88,7 @@
     </div>
   </div>
 
+  <!-- password modal -->
   <div v-if="showPasswordModal" class="modal">
     <div clasS="modal-content">
       <h2>Ändra Lösenord</h2>
