@@ -13,16 +13,53 @@
 </script>
 
 <template>
-  <h1>course name: {{ course.name }}</h1>
-  <template v-for="quiz in course.quizzes" :key="quiz.id">
-    <div>
-      <router-link
-        :to="`/student/${route.params.userid}/course/${route.params.courseid}/quiz/${quiz.id}/`"
-      >
-        <h1>{{ quiz.title }}</h1>
-      </router-link>
+  <section>
+    <h1>{{ course.name }}</h1>
+    <div class="quiz-grid">
+      <template v-if="course.quizzes.length">
+        <div v-for="quiz in course.quizzes" :key="quiz.id" class="quiz-card">
+          <router-link
+            :to="`/student/${route.params.userid}/course/${route.params.courseid}/quiz/${quiz.id}/`"
+          >
+            <h1>{{ quiz.title }}</h1>
+          </router-link>
+        </div>
+      </template>
     </div>
-  </template>
+  </section>
 </template>
 
-<style scoped></style>
+<style scoped>
+  section {
+    max-width: 800px;
+    margin: auto;
+    text-align: center;
+  }
+
+  .quiz-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 20px;
+    margin-top: 20px;
+  }
+
+  .quiz-card {
+    background: #f4f4f4;
+    padding: 15px;
+    border-radius: 8px;
+    text-align: center;
+    box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.1);
+    transition: transform 0.2s;
+  }
+
+  .quiz-card:hover {
+    transform: scale(1.05);
+  }
+
+  .quiz-card a {
+    text-decoration: none;
+    color: #333;
+    font-weight: bold;
+  }
+
+</style>
