@@ -13,43 +13,36 @@
     width,
     bg
   } = defineProps({
-    // title for card.
     title: {
       type: String,
       required: true
     },
-    // if card is going to be a routerlink
     link: {
       type: Boolean
     },
-    // if card is going to have a left button, can also input a string through this to give the button a label
     leftButton: {
-      type: [Boolean, String]
+      type: [Boolean, String],
+      default: "left button"
     },
-    // if card is going to have a middle button
     middleButton: {
-      type: [Boolean, String]
+      type: Boolean
     },
-    // if card is going to have a right button
     rightButton: {
-      type: [Boolean, String]
+      type: Boolean
     },
-    // the string link to where
     routeTo: {
       type: String,
       default: "/"
     },
-    // height of the card
     height: {
       type: Number,
       default: 150
     },
-    // width of the card
     width: {
       type: Number,
       default: 300
     },
-    // background color
+    secondary: Boolean,
     bg: {
       type: String,
       default: "white"
@@ -58,17 +51,17 @@
 
   const router = useRouter()
   const emit = defineEmits(["lclick", "mclick", "rclick"])
-  //console.log(bg)
+  console.log(bg)
 
-  function propagate(em, event) {
+  function propagate(event) {
     event.stopPropagation()
-    emit(em, event)
+    emit("lclick", event)
   }
 </script>
 
 <template>
   <template v-if="link">
-    <div class="course-card-container" @click="router.push(routeTo)">
+    <div class="course-card-container link" @click="router.push(routeTo)">
       <div id="course-card">
         <h1>{{ title }}</h1>
       </div>
@@ -76,20 +69,35 @@
       <g-button
         :label="leftButton"
         v-if="leftButton"
-        @click="propagate('lclick', event)"
+        @click="
+          (event) => {
+            event.stopPropagation()
+            emit('lclick', event)
+          }
+        "
         id="left-button"
         class="buttons"
       />
       <g-button
         :label="middleButton"
         v-if="middleButton"
-        @click="propagate('mclick', event)"
+        @click="
+          (event) => {
+            event.stopPropagation()
+            emit('mclick', event)
+          }
+        "
         id="middle-button"
       />
       <g-button
         :label="rightButton"
         v-if="rightButton"
-        @click="propagate('rclick', event)"
+        @click="
+          (event) => {
+            event.stopPropagation()
+            emit('rclick', event)
+          }
+        "
         id="right-button"
       />
     </div>
@@ -106,6 +114,17 @@
     --height: v-bind("String(height) + 'px'");
     --width: v-bind("String(width) + 'px'");
     --bg: v-bind("'#' + bg");
+  }
+
+  .link {
+    cursor: pointer;
+    transition: all 0.3s;
+  }
+
+  .link:hover {
+    box-shadow: 0px 0px 10px 2px rgba(255, 255, 255, 0.75);
+    -webkit-box-shadow: 0px 0px 10px 2px rgba(255, 255, 255, 0.75);
+    -moz-box-shadow: 0px 0px 10px 2px rgba(255, 255, 255, 0.75);
   }
 
   .course-card-container {
@@ -125,6 +144,10 @@
   }
 
   #course-card {
+    /* border: black 2px solid;
+    border-radius: 10px; */
+    /* height: var(--height);
+    width: var(--width); */
     background-color: var(--bg);
     grid-area: main;
   }
@@ -134,11 +157,16 @@
     color: black;
     margin: 0;
     padding-bottom: 5px;
-    border-bottom: black solid 2px;
     border-radius: 8px 8px 0px 0px;
+    box-shadow: 0px 0px 10px 10px rgba(255, 255, 255, 1);
+    -webkit-box-shadow: 0px 0px 10px 10px rgba(255, 255, 255, 1);
+    -moz-box-shadow: 0px 10px 0px 10px rgba(255, 255, 255, 1);
+    overflow: hidden;
   }
 
   #bottom-container {
+    /* height: 20%;
+    width: 100%; */
     border-radius: 0 0 10px 10px;
     border-bottom: 2px solid black;
     border-right: 2px solid black;

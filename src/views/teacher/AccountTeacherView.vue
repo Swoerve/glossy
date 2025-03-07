@@ -39,9 +39,13 @@
             :bg="course.id.substr(0, 6)"
             :route-to="`/teacher/${route.params.userid}/course/${course.id}/`"
             right-button
-            left-button="left"
+            left-button="statistik"
             link
-            @lclick="console.log('view!')"
+            @lclick="
+              $router.push(
+                `/teacher/${route.params.userid}/course/${course.id}/coursestatistics`
+              )
+            "
             @mclick="console.log('edit!')"
             @rclick="console.log('delete!')"
           />
