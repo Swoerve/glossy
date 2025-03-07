@@ -95,8 +95,30 @@
     </div>
   </template>
   <template v-else>
-    <div id="course-card">
-      <h1>{{ title }}</h1>
+    <div class="course-card-container">
+      <div id="course-card">
+        <h1>{{ title }}</h1>
+      </div>
+
+      <g-button
+        :label="leftButton"
+        v-if="leftButton"
+        @click="propagate('lclick', event)"
+        id="left-button"
+        class="buttons"
+      />
+      <g-button
+        :label="middleButton"
+        v-if="middleButton"
+        @click="propagate('mclick', event)"
+        id="middle-button"
+      />
+      <g-button
+        :label="rightButton"
+        v-if="rightButton"
+        @click="propagate('rclick', event)"
+        id="right-button"
+      />
     </div>
   </template>
 </template>
