@@ -3,12 +3,7 @@
   import { ref } from "vue"
   import { useRouter } from "vue-router"
   import { RouterLink, RouterView } from "vue-router"
-<<<<<<< HEAD
-  import Button from "../components/buttonComponent.vue"
-=======
-  import Button from "@/components/buttonComponent.vue"
-  import logo from "@/assets/glossy.png"
->>>>>>> 7235d04aa1165827f03bf8df9635ac18516e24f0
+  import Button from "../../components/buttonComponent.vue"
 
   const router = useRouter()
   const email = ref("")
