@@ -1,6 +1,7 @@
 <script setup>
-  import Button from "../components/buttonComponent.vue"
-  import SignUpView from "./SignUpView.vue"
+  import Button from "@/components/buttonComponent.vue"
+  import logo from "@/assets/glossy.png"
+  //import SignUpView from "./SignUpView.vue"
 
   const handleClick = () => {
     if (!isRouterLink.value) {
@@ -11,7 +12,7 @@
 
 <template>
   <div class="homepage">
-    <img src="../assets/glossy.png" alt="logo" class="picture" />
+    <img :src="logo" alt="logo" class="picture" />
     <h1>Välkommen!</h1>
     <Button
       label="Logga in"
@@ -27,7 +28,6 @@
 </template>
 
 <style scoped>
-
   .homepage {
     display: flex;
     flex-direction: column;
@@ -61,6 +61,5 @@
 
   h1 {
     color: white;
-}
-
+  }
 </style>

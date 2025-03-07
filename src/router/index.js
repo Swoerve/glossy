@@ -1,16 +1,16 @@
 import { createRouter, createWebHistory } from "vue-router"
-import HomeView from "../views/HomeView.vue"
-import LoginView from "@/views/LoginView.vue"
-import AccountTeacherView from "@/views/AccountTeacherView.vue"
-import SignUpView from "@/views/SignUpView.vue"
-import AccountStudentView from "@/views/AccountStudentView.vue"
-import CreateQuizView from "@/views/CreateQuizView.vue"
-import QuizView from "@/views/QuizView.vue"
-import CreateCourseView from "@/views/CreateCourseView.vue"
-import TeacherCourseView from "@/views/TeacherCourseView.vue"
-import StudentCourseView from "@/views/StudentCourseView.vue"
-import StudentProfileView from "@/views/StudentProfileView.vue"
-import TeacherProfileView from "@/views/TeacherProfileView.vue"
+import HomeView from "@/views/generic/HomeView.vue"
+import LoginView from "@/views/generic/LoginView.vue"
+import AccountTeacherView from "@/views/teacher/AccountTeacherView.vue"
+import SignUpView from "@/views/generic/SignUpView.vue"
+import AccountStudentView from "@/views/student/AccountStudentView.vue"
+import CreateQuizView from "@/views/quiz/CreateQuizView.vue"
+import QuizView from "@/views/quiz/QuizView.vue"
+import CreateCourseView from "@/views/teacher/CreateCourseView.vue"
+import TeacherCourseView from "@/views/teacher/TeacherCourseView.vue"
+import StudentCourseView from "@/views/student/StudentCourseView.vue"
+import StudentProfileView from "@/views/student/StudentProfileView.vue"
+import TeacherProfileView from "@/views/teacher/TeacherProfileView.vue"
 import CourseStatisticsView from "@/views/statistics/CourseStatisticsView.vue"
 import QuizStatisticsView from "@/views/statistics/QuizStatisticsView.vue"
 import StudentStatisticsView from "@/views/statistics/StudentStatisticsView.vue"
@@ -28,7 +28,7 @@ const router = createRouter({
       path: "/login",
       name: "login",
 
-      component: () => import("../views/LoginView.vue")
+      component: () => import("../views/generic/LoginView.vue")
     },
     {
       path: "/loginview",

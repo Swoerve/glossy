@@ -3,7 +3,8 @@
   import { ref } from "vue"
   import { useRouter } from "vue-router"
   import { RouterLink, RouterView } from "vue-router"
-  import Button from '../components/buttonComponent.vue'
+  import Button from "@/components/buttonComponent.vue"
+  import logo from "@/assets/glossy.png"
 
   const router = useRouter()
   const email = ref("")
@@ -44,7 +45,7 @@
 <template>
   <main>
     <div class="logo-container">
-      <img src="../assets/glossy.png" alt="logo" class="logo" />
+      <img :src="logo" alt="logo" class="logo" />
     </div>
 
     <input type="email" name="" id="" placeholder="email" v-model="email" />
@@ -57,8 +58,16 @@
       v-model="password"
     />
 
-    <Button label="Logga in som elev" color="btn-secondary" @click="login('student')"></Button>
-    <Button label="Logga in som lärare" color="btn-primary" @click="login('teacher')"></Button>
+    <Button
+      label="Logga in som elev"
+      color="btn-secondary"
+      @click="login('student')"
+    />
+    <Button
+      label="Logga in som lärare"
+      color="btn-primary"
+      @click="login('teacher')"
+    />
 
     <router-link to="/">
       <button class="back">Tillbaka</button>
