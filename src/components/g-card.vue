@@ -22,13 +22,15 @@
     },
     leftButton: {
       type: [Boolean, String],
-      default: "left button"
+      default: false
     },
     middleButton: {
-      type: Boolean
+      type: [Boolean, String],
+      default: false
     },
     rightButton: {
-      type: Boolean
+      type: [Boolean, String],
+      default: false
     },
     routeTo: {
       type: String,
