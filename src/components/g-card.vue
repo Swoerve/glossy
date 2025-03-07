@@ -61,7 +61,7 @@
 
 <template>
   <template v-if="link">
-    <div class="course-card-container" @click="router.push(routeTo)">
+    <div class="course-card-container link" @click="router.push(routeTo)">
       <div id="course-card">
         <h1>{{ title }}</h1>
       </div>
@@ -116,6 +116,17 @@
     --bg: v-bind("'#' + bg");
   }
 
+  .link {
+    cursor: pointer;
+    transition: all 0.3s;
+  }
+
+  .link:hover {
+    box-shadow: 0px 0px 10px 2px rgba(255, 255, 255, 0.75);
+    -webkit-box-shadow: 0px 0px 10px 2px rgba(255, 255, 255, 0.75);
+    -moz-box-shadow: 0px 0px 10px 2px rgba(255, 255, 255, 0.75);
+  }
+
   .course-card-container {
     box-sizing: border-box;
     position: relative;
@@ -146,8 +157,11 @@
     color: black;
     margin: 0;
     padding-bottom: 5px;
-    border-bottom: black solid 2px;
     border-radius: 8px 8px 0px 0px;
+    box-shadow: 0px 0px 10px 10px rgba(255, 255, 255, 1);
+    -webkit-box-shadow: 0px 0px 10px 10px rgba(255, 255, 255, 1);
+    -moz-box-shadow: 0px 10px 0px 10px rgba(255, 255, 255, 1);
+    overflow: hidden;
   }
 
   #bottom-container {

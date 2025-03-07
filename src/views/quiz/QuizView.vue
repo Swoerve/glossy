@@ -58,7 +58,7 @@
   })[0]
 
   // answered list containing all the answers the user has made
-  const answered = ref({})
+  const answered = ref([])
 
   // contains the current question index
   const currQuestion = ref(0)
@@ -115,6 +115,27 @@
     try: tryCount(),
     answers: []
   })
+
+  // moves the current question forwards or backwards but also clamps it so we dont fall out of bounds in the array
+  function moveQuestion(change) {
+    let temp = currQuestion.value
+    temp += change
+    if (temp < 0) {
+      temp = 0
+    }
+    if (temp > quiz.value.questions.length - 1) {
+      temp = quiz.value.questions.length - 1
+    }
+    currQuestion.value = temp
+  }
+
+  window.addEventListener("keydown", (e) => {
+    if (e.key === "ArrowLeft") {
+      moveQuestion(-1)
+    } else if (e.key === "ArrowRight") {
+      moveQuestion(1)
+    }
+  })
 </script>
 
 <!--
@@ -123,28 +144,42 @@ then retrieve that info and put it into question components?
 -->
 
 <template>
-  <h1>{{ quiz.title }}</h1>
   <template v-if="!endScreen">
-    <Question
-      :qid="currQuestion"
-      :question="quiz.questions[currQuestion]"
-      @answered="addAnswer"
-    />
-    <button v-if="currQuestion > 0" @click="currQuestion -= 1">
-      Prev Question
-    </button>
-    <button
-      v-if="currQuestion < quiz.questions.length - 1"
-      @click="currQuestion += 1"
-    >
-      Next Question
-    </button>
-    <button
-      v-if="Object.keys(answered).length == quiz.questions.length"
-      @click="switchToEndScreen"
-    >
-      End Quiz
-    </button>
+    <main class="quiz-container">
+      <div class="question-container">
+        <h1>{{ quiz.title }}</h1>
+        <Question
+          :qid="currQuestion"
+          :question="quiz.questions[currQuestion]"
+          :answers="answered"
+          @answered="addAnswer"
+        />
+      </div>
+      <button
+        v-if="currQuestion > 0"
+        @click="moveQuestion(-1)"
+        id="previous-button"
+      >
+        Previous
+      </button>
+      <button
+        v-if="currQuestion < quiz.questions.length - 1"
+        @click="moveQuestion(1)"
+        id="next-button"
+      >
+        Next
+      </button>
+      <button
+        v-if="
+          Object.keys(answered).length === quiz.questions.length &&
+          currQuestion === quiz.questions.length - 1
+        "
+        @click="switchToEndScreen"
+        id="end-button"
+      >
+        End Quiz
+      </button>
+    </main>
   </template>
   <template v-else>
     <div>
@@ -165,11 +200,59 @@ then retrieve that info and put it into question components?
 </template>
 
 <style>
+  h1 {
+    text-align: center;
+  }
+
   .correct {
     background-color: greenyellow;
   }
 
   .incorrect {
     background-color: red;
+  }
+
+  .quiz-container {
+    height: calc(100vh - 50px);
+    width: 50dvw;
+    margin: auto;
+    display: grid;
+    grid-template-areas:
+      "left main right"
+      "left main right"
+      "left main right"
+      "end end end";
+    grid-template-columns: 1fr 3fr 1fr;
+    grid-template-rows: 1fr;
+  }
+
+  .question-container {
+    grid-area: main;
+  }
+
+  #previous-button {
+    background-color: transparent;
+    border: 0;
+    grid-area: left;
+    transition: 0.3s;
+  }
+
+  #previous-button:hover {
+    background-color: rgba(0, 0, 0, 0.25);
+  }
+
+  #next-button {
+    background-color: transparent;
+    border: 0;
+    grid-area: right;
+    transition: 0.3s;
+  }
+
+  #next-button:hover {
+    background-color: rgba(0, 0, 0, 0.25);
+  }
+
+  #end-button {
+    grid-area: right;
   }
 </style>
