@@ -53,7 +53,6 @@
         <template v-for="course in courses" :key="course.id">
           <g-card
             :title="course.name"
-            :width="100"
             :bg="course.id.substr(0, 6)"
             :route-to="`/student/${route.params.userid}/course/${course.id}/`"
             link
@@ -66,7 +65,6 @@
         You aren't part of any courses, ask your teacher for a course code
       </h1>
     </template>
-    <g-card title="test" :height="150" />
     <input type="text" name="" id="" v-model="cCode" />
     <button @click="joinCourse()">Join course</button>
   </section>
