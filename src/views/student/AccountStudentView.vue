@@ -34,11 +34,13 @@
   function joinCourse() {
     let course = getLocalStorage("courses").filter((obj) => {
       return obj.code === cCode.value
-    })
+    })[0]
 
-    student.value.courses.push(course[0].id)
+    student.value.courses.push(course.id)
     replaceLocalStorage("students", student.value)
     replaceLogin(student.value)
+    course.students.push(student.value.id)
+    replaceLocalStorage("courses", course)
     loadCourses()
   }
 </script>
