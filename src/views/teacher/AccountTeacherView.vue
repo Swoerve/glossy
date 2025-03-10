@@ -1,7 +1,12 @@
 <script setup>
   import { ref } from "vue"
   import Settings from "@/components/user-settings.vue"
-  import { getLocalStorage, getSessionStorage } from "@/storageHandler"
+  import {
+    deleteLocalStorage,
+    getLocalStorage,
+    getSessionStorage,
+    replaceLocalStorage
+  } from "@/storageHandler"
   import { updateLocalStorage, updateSessionStorage } from "@/storageHandler"
   import { useRoute } from "vue-router"
   import gCard from "@/components/g-card.vue"
@@ -22,6 +27,33 @@
     courses.value = result
   }
 
+  function deleteCourse(id) {
+    let students = []
+    let course = courses.value.filter((obj) => {
+      return obj.id === id
+    })[0]
+    course.students.forEach((student) => {
+      students.push(
+        getLocalStorage("students").filter((stud) => {
+          return student === stud.id
+        })[0]
+      )
+    })
+    console.log(course)
+    console.log(students)
+    students.forEach((stud) => {
+      let ind = stud.courses.findIndex((cors) => {
+        return cors === id
+      })
+
+      stud.courses.splice(ind, 1)
+    })
+    students.forEach((stud) => {
+      replaceLocalStorage("students", stud)
+    })
+    deleteLocalStorage("courses", id)
+  }
+
   const showModal = ref(false)
   const showSettings = ref(false)
 </script>
@@ -38,7 +70,7 @@
             :title="course.name"
             :bg="course.id.substr(0, 6)"
             :route-to="`/teacher/${route.params.userid}/course/${course.id}/`"
-            right-button
+            right-button="delete"
             left-button="statistik"
             link
             @lclick="
@@ -46,8 +78,7 @@
                 `/teacher/${route.params.userid}/course/${course.id}/coursestatistics`
               )
             "
-            @mclick="console.log('edit!')"
-            @rclick="console.log('delete!')"
+            @rclick="deleteCourse(course.id)"
           />
         </template>
       </div>

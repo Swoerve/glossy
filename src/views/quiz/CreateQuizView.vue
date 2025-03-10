@@ -65,7 +65,7 @@
       <h1 id="header">Skapa ny quiz for {{ course.name }}</h1>
       <p class="quiztext">Titel</p>
       <input
-        v-model="quiz.title"  
+        v-model="quiz.title"
         placeholder="Quiz 1 titel"
         class="quizbutton"
       />
@@ -137,7 +137,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    min-height: 100vh;
+    min-height: calc(100dvh - 50px);
     width: 100%;
   }
 
