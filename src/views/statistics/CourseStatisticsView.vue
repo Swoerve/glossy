@@ -12,42 +12,50 @@
   })
 
   const course = getLocalStorage("courses").filter((obj) => {
-    console.log(obj.id)
     return obj.id === route.params.courseid
   })[0]
-  console.log(course)
 
-  //En forEach som returnerar eleverna från kursen
+  // Hämtar elever från kursen
   course.students.forEach((student) => {
-    students.value.push(
-      getLocalStorage("students").filter((obj) => {
-        console.log("stat")
-        console.log(student)
-        console.log(obj.id)
-        console.log(obj.id === student)
-        if (obj.id === student) {
-          return true
-        }
-      })[0]
+    const foundStudent = getLocalStorage("students").find(
+      (obj) => obj.id === student
     )
+    if (foundStudent) students.value.push(foundStudent)
   })
-  console.log(students.value)
-  console.log(statistics)
 
-  console.log(statistics[0].studentid)
-
+  // Hämtar quizzes
   course.quizzes.forEach((quiz) => {
-    quizzes.value.push(
-      course.quizzes.filter((obj) => {
-        console.log(quiz)
-        return obj.id === quiz.id
-      })[0]
-    )
+    quizzes.value.push(quiz)
   })
 
-  // student.value = statistics[0].student
+  // Funktion för att beräkna rätt och fel svar för varje quiz
+  const quizResults = computed(() => {
+    return quizzes.value.map((quiz) => {
+      const quizStats = statistics.filter((stat) => stat.quizid === quiz.id)
 
-  //En funktion för att filtrera och hitta kursens namn
+      let correctAnswers = 0
+      let incorrectAnswers = 0
+
+      quizStats.forEach((stat) => {
+        stat.answers.forEach((answer) => {
+          if (answer.correct) {
+            correctAnswers++
+          } else {
+            incorrectAnswers++
+          }
+        })
+      })
+
+      return {
+        id: quiz.id,
+        title: quiz.title,
+        correctAnswers,
+        incorrectAnswers
+      }
+    })
+  })
+
+  // Hämta kursnamn
   function getCourseName() {
     const courses = getLocalStorage("courses")
     const currentCourse = courses.find(
@@ -55,44 +63,33 @@
     )
     return currentCourse ? currentCourse.name : "Kursen Hittades Inte"
   }
-
-  // const data = getLocalStorage("statistics").filter((obj) => {
-  //   return obj.courseid === route.params.courseid
-  // })
-
-  // console.log(data)
-  // console.log(data[0].try)
-  // console.log(data[0].answers)
-  // console.log(data[1].try)
-  // console.log(data[1].answers)
 </script>
+
 <template>
   <h1>Statistik för {{ getCourseName() }}</h1>
-  <section>
-    <div>
-      <h2 class="heading">Elever</h2>
-      <ul class="student-list">
-        <li class="student" v-for="(student, index) in students" :key="index">
-          <router-link
-            :to="`/teacher/${route.params.userid}/course/${course.id}/${student.id}/studentstatistics`"
-          >
-            {{ student.name }}
-          </router-link>
-        </li>
-      </ul>
-    </div>
-    <div>
-      <h2 class="heading">Quiz</h2>
-      <ul class="quiz-list">
-        <li class="quiz" v-for="(quiz, index) in quizzes" :key="index">
-          <router-link
-            :to="`/teacher/${route.params.userid}/course/${course.id}/quiz/${quiz.id}/quizstatistics`"
-            >{{ quiz.title }}</router-link
-          >
-        </li>
-      </ul>
-    </div>
-  </section>
+  <h2 class="heading">Elever</h2>
+  <h2 class="heading">Quiz</h2>
+  <ul class="student-list">
+    <li class="student" v-for="(student, index) in students" :key="index">
+      <router-link
+        :to="`/teacher/${route.params.userid}/course/${course.id}/${student.id}/studentstatistics`"
+      >
+        {{ student.name }}
+      </router-link>
+    </li>
+  </ul>
+
+  <ul class="quiz-list">
+    <li class="quiz" v-for="(quiz, index) in quizzes" :key="index">
+      <router-link
+        :to="`/teacher/${route.params.userid}/course/${course.id}/quiz/${quiz.id}/quizstatistics`"
+      >
+        {{ quiz.title }}
+      </router-link>
+      <!-- Visa antal rätt och fel -->
+      <p>Rätt: {{ quiz.correctAnswers }} | Fel: {{ quiz.incorrectAnswers }}</p>
+    </li>
+  </ul>
 </template>
 <style scoped>
   * {
