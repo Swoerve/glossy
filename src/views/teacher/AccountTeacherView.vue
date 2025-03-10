@@ -141,6 +141,11 @@
     cursor: pointer;
   }
 
+  /* tar bort underline från länken i knappen */
+  a {
+    text-decoration: none;
+  }
+
   .course-container {
     width: 80%;
     display: flex;

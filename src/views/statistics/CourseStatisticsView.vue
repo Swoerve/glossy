@@ -27,8 +27,8 @@
   course.quizzes.forEach((quiz) => {
     quizzes.value.push(quiz)
   })
- // Funktion för att beräkna rätt och fel svar för varje quiz
- const quizResults = computed(() => {
+  // Funktion för att beräkna rätt och fel svar för varje quiz
+  const quizResults = computed(() => {
     return quizzes.value.map((quiz) => {
       const quizStats = statistics.filter((stat) => stat.quizid === quiz.id)
 
@@ -69,29 +69,37 @@
 
 <template>
   <h1>Statistik för {{ getCourseName() }}</h1>
-  <h2 class="heading">Elever</h2>
-  <h2 class="heading">Quiz</h2>
-  <ul class="student-list">
-    <li class="student" v-for="(student, index) in students" :key="index">
-      <router-link
-        :to="`/teacher/${route.params.userid}/course/${course.id}/${student.id}/studentstatistics`"
-      >
-        {{ student.name }}
-      </router-link>
-    </li>
-  </ul>
+  <section>
+    <div>
+      <h2 class="heading">Elever</h2>
+      <ul class="student-list">
+        <li class="student" v-for="(student, index) in students" :key="index">
+          <router-link
+            :to="`/teacher/${route.params.userid}/course/${course.id}/${student.id}/studentstatistics`"
+          >
+            {{ student.name }}
+          </router-link>
+        </li>
+      </ul>
+    </div>
+    <div>
+      <h2 class="heading">Quiz</h2>
 
-  <ul class="quiz-list">
-    <li class="quiz" v-for="(quiz, index) in quizResults" :key="index">
-      <router-link
-        :to="`/teacher/${route.params.userid}/course/${course.id}/quiz/${quiz.id}/quizstatistics`"
-      >
-        {{ quiz.title }}
-      </router-link>
-      <!-- Visa antal rätt och fel -->
-      <p>Rätt: {{ quiz.correctAnswers }} | Fel: {{ quiz.incorrectAnswers }}</p>
-    </li>
-  </ul>
+      <ul class="quiz-list">
+        <li class="quiz" v-for="(quiz, index) in quizResults" :key="index">
+          <router-link
+            :to="`/teacher/${route.params.userid}/course/${course.id}/quiz/${quiz.id}/quizstatistics`"
+          >
+            {{ quiz.title }}
+          </router-link>
+          <!-- Visa antal rätt och fel -->
+          <p>
+            Rätt: {{ quiz.correctAnswers }} | Fel: {{ quiz.incorrectAnswers }}
+          </p>
+        </li>
+      </ul>
+    </div>
+  </section>
 </template>
 <style scoped>
   * {
@@ -104,6 +112,13 @@
     color: #333333;
   }
 
+  section {
+    display: flex;
+    justify-content: space-evenly;
+    flex-wrap: wrap;
+    align-items: flex-start;
+  }
+
   .heading {
     font-size: 1.5rem;
     font-weight: bold;
@@ -112,20 +127,32 @@
   }
 
   /* Lista-styling */
-  .student-list,
-  .quiz-list {
+  .quiz-list,
+  .student-list {
     list-style: none;
     padding: 0;
   }
 
-  .student,
-  .quiz {
-    background: #f7f2f84d;
-    margin: 10px auto;
-    padding: 10px;
+  .quiz,
+  .student {
+    background-color: #f7f2f84d;
+    margin: 0.78em auto;
+    padding: 0.79em;
     border-radius: 10px;
     transition: all 0.3s ease-in-out;
+    text-align: center;
     width: 80%;
+  }
+
+  div {
+    text-align: center;
+    justify-content: space-evenly;
+    flex: 1;
+    min-width: 300px;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.1);
+    margin: 10px;
   }
 
   a {
@@ -134,7 +161,7 @@
     font-weight: bold;
   }
 
-  @media (min-width: 581px) {
+  @media (min-width: 580px) {
     .student:hover,
     .quiz:hover {
       background: #ffffff99;
@@ -146,6 +173,7 @@
     }
   }
 
+  /* För mindre skärmar/mobiler */
   @media (max-width: 580px) {
     h1 {
       font-size: 1.8rem;
@@ -159,6 +187,14 @@
     .quiz {
       width: 95%;
       padding: 15px;
+    }
+
+    section {
+      flex-direction: column;
+    }
+
+    div {
+      width: 90%;
     }
   }
 </style>
