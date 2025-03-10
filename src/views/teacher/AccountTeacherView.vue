@@ -1,13 +1,11 @@
 <script setup>
   import { ref } from "vue"
-  import Settings from "@/components/user-settings.vue"
   import {
     deleteLocalStorage,
     getLocalStorage,
     getSessionStorage,
     replaceLocalStorage
   } from "@/storageHandler"
-  import { updateLocalStorage, updateSessionStorage } from "@/storageHandler"
   import { useRoute } from "vue-router"
   import gCard from "@/components/g-card.vue"
 
@@ -15,10 +13,12 @@
   const courses = ref(null)
   const route = useRoute()
 
+  // check if we are logged in
   if (getSessionStorage("loggedin")) {
     teacher.value = getSessionStorage("loggedin")
   }
 
+  // get courses if they exist already
   if (getLocalStorage("courses")) {
     let temp = getLocalStorage("courses")
     let result = temp.filter((course) => {
@@ -29,9 +29,14 @@
 
   function deleteCourse(id) {
     let students = []
+
+    // filter out specific course we want to delete
     let course = courses.value.filter((obj) => {
       return obj.id === id
     })[0]
+
+    // for each student in this course we want to find them from localstorage
+    // and push them into our temporary array
     course.students.forEach((student) => {
       students.push(
         getLocalStorage("students").filter((stud) => {
@@ -39,8 +44,8 @@
         })[0]
       )
     })
-    console.log(course)
-    console.log(students)
+
+    // for each student we want to splice out this course id
     students.forEach((stud) => {
       let ind = stud.courses.findIndex((cors) => {
         return cors === id
@@ -48,9 +53,13 @@
 
       stud.courses.splice(ind, 1)
     })
+
+    // for each student we want to update it in local storage
     students.forEach((stud) => {
       replaceLocalStorage("students", stud)
     })
+
+    // delete this course from the local storage
     deleteLocalStorage("courses", id)
   }
 
