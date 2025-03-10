@@ -51,7 +51,7 @@
             <h3>{{ quiz.title }}</h3>
           </router-link>
           <button @click="deleteQuiz(quiz.id)" class="delete-button">
-             Ta bort
+            Ta bort
           </button>
         </div>
       </template>

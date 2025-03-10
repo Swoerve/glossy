@@ -68,26 +68,31 @@
 </script>
 <template>
   <h1>Statistik för {{ getCourseName() }}</h1>
-  <h2 class="heading">Elever</h2>
-  <h2 class="heading">Quiz</h2>
-  <ul class="student-list">
-    <li class="student" v-for="(student, index) in students" :key="index">
-      <router-link
-        :to="`/teacher/${route.params.userid}/course/${course.id}/${student.id}/studentstatistics`"
-      >
-        {{ student.name }}
-      </router-link>
-    </li>
-  </ul>
-
-  <ul class="quiz-list">
-    <li class="quiz" v-for="(quiz, index) in quizzes" :key="index">
-      <router-link
-        :to="`/teacher/${route.params.userid}/course/${course.id}/quiz/${quiz.id}/quizstatistics`"
-        >{{ quiz.title }}</router-link
-      >
-    </li>
-  </ul>
+  <section>
+    <div>
+      <h2 class="heading">Elever</h2>
+      <ul class="student-list">
+        <li class="student" v-for="(student, index) in students" :key="index">
+          <router-link
+            :to="`/teacher/${route.params.userid}/course/${course.id}/${student.id}/studentstatistics`"
+          >
+            {{ student.name }}
+          </router-link>
+        </li>
+      </ul>
+    </div>
+    <div>
+      <h2 class="heading">Quiz</h2>
+      <ul class="quiz-list">
+        <li class="quiz" v-for="(quiz, index) in quizzes" :key="index">
+          <router-link
+            :to="`/teacher/${route.params.userid}/course/${course.id}/quiz/${quiz.id}/quizstatistics`"
+            >{{ quiz.title }}</router-link
+          >
+        </li>
+      </ul>
+    </div>
+  </section>
 </template>
 <style scoped>
   * {

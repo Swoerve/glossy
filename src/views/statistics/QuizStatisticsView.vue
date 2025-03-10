@@ -41,7 +41,7 @@
   </div>
 
   <div>
-    <!-- <p>Totala försök:{{quizData }}</p> -->
+    <p>Totala försök:{{ quizData.try }}</p>
   </div>
 </template>
 <style scoped>
