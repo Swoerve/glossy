@@ -126,6 +126,7 @@
 
   #settings:hover {
     color: #141313;
+    cursor: pointer;
   }
 
   #home {
@@ -151,6 +152,7 @@
 
   #user:hover {
     color: #141313;
+    cursor: pointer;
   }
 
   .user-menu {
