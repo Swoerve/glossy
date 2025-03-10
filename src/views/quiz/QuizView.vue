@@ -226,6 +226,12 @@ then retrieve that info and put it into question components?
     grid-template-rows: 1fr;
   }
 
+  @media screen and (max-width: 600px) {
+    .quiz-container {
+      width: 100dvw;
+    }
+  }
+
   .question-container {
     grid-area: main;
   }

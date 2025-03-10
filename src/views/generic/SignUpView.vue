@@ -204,10 +204,10 @@
   #signup {
     display: flex;
     flex-direction: column;
-    width: 400px;
+    width: 80%;
     padding: 20px;
     border: 0.5px solid #9667e0;
-    border-radius: 8px;
+    border-radius: 10px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     background-color: #f2ebfb;
   }

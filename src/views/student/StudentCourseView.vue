@@ -31,7 +31,7 @@
 
 <style scoped>
   section {
-    max-width: 800px;
+    max-width: 980px;
     margin: auto;
     text-align: center;
   }
@@ -40,7 +40,7 @@
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
     gap: 20px;
-    margin-top: 20px;
+    margin: 20px;
   }
 
   .quiz-card {
@@ -61,5 +61,4 @@
     color: #333;
     font-weight: bold;
   }
-
 </style>
