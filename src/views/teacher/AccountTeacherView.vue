@@ -31,6 +31,9 @@
 
   <section id="course-section">
     <h2>Dina kurser</h2>
+    <router-link :to="`/teacher/${route.params.userid}/createcourseview`">
+      <button class="account-button">Skapa en ny kurs (+)</button>
+    </router-link>
     <template v-if="courses">
       <div class="course-container">
         <template v-for="course in courses" :key="course.id">
@@ -55,9 +58,6 @@
     <template v-else>
       <h1>Du har inga kurser inlagda</h1>
     </template>
-    <router-link :to="`/teacher/${route.params.userid}/createcourseview`">
-      <button class="account-button">Skapa en ny kurs (+)</button>
-    </router-link>
   </section>
 </template>
 
@@ -90,13 +90,15 @@
   }
 
   .account-button {
-    margin: 0;
+    display: block;
+    margin: 1rem auto;
     height: 40px;
     width: 150px;
     color: white;
     background-color: #9667e0;
     border: 0.5px solid #d4bbfc;
     border-radius: 4px;
+    cursor: pointer;
   }
 
   .course-container {
