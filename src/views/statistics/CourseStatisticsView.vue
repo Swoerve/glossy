@@ -79,7 +79,7 @@ function getCourseName() {
   </ul>
 
   <ul class="quiz-list">
-    <li class="quiz" v-for="(quiz, index) in quizzes" :key="index">
+    <li class="quiz" v-for="(quiz, index) in quizResults" :key="index">
       <router-link
         :to="`/teacher/${route.params.userid}/course/${course.id}/quiz/${quiz.id}/quizstatistics`"
       >
