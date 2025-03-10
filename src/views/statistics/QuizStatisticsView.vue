@@ -37,7 +37,7 @@
     <button class="back">Tillbaka till statistik sidan</button>
   </router-link>
   <div>
-    <p>{{ quizData }}</p>
+    <!-- <p>{{ quizData }}</p> -->
   </div>
 
   <div>
