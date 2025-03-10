@@ -37,7 +37,7 @@
 
   .picture {
     width: auto;
-    height: calc(40vh - 50px);
+    height: calc(40dvh - 50px);
     margin-left: 20px;
   }
 

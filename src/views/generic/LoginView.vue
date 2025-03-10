@@ -84,8 +84,8 @@
   }
 
   .logo {
-    width: 500px;
-    height: auto;
+    width: auto;
+    height: calc(40dvh - 50px);
   }
 
   main {

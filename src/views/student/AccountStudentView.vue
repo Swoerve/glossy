@@ -1,6 +1,5 @@
 <script setup>
   import { ref } from "vue"
-  import Settings from "@/components/user-settings.vue"
   import {
     getLocalStorage,
     getSessionStorage,
@@ -12,7 +11,6 @@
   import gCard from "@/components/g-card.vue"
 
   const route = useRoute()
-  const showSettings = ref(null)
   const student = ref(null)
   const courses = ref(null)
   const cCode = ref("")
@@ -102,7 +100,13 @@
     display: flex;
     gap: 1rem;
     flex-direction: row;
+    flex-wrap: wrap;
+    margin: auto;
     margin-bottom: 1rem;
+  }
+
+  .course-container div {
+    margin: auto;
   }
 
   h1 {

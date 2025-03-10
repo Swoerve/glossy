@@ -78,6 +78,10 @@
     text-align: center;
   }
 
+  h2 {
+    text-align: center;
+  }
+
   #idk {
     display: flex;
     flex-direction: row;
@@ -96,10 +100,18 @@
   }
 
   .course-container {
-    width: 100%;
+    width: 80%;
     display: flex;
-    gap: 1rem;
+    justify-content: space-between;
     flex-direction: row;
+    flex-wrap: wrap;
+    margin: auto;
     margin-bottom: 1rem;
+  }
+
+  @media screen and (max-width: 800px) {
+    .course-container div {
+      margin: auto;
+    }
   }
 </style>
