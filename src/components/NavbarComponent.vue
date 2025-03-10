@@ -2,14 +2,24 @@
   import { ref, computed, watch } from "vue"
   import { RouterLink, RouterView } from "vue-router"
   import { useRoute } from "vue-router"
-  import UserSettings from "./user-settings.vue"
   import { getLocalStorage, getSessionStorage } from "../storageHandler"
   // import router from "..router/"
-  const showSettings = ref(null)
   const route = useRoute()
   const isLoggedIn = ref(false)
   const showProfile = computed(() => isLoggedIn.value)
   const showHomeButton = ref(false)
+  const showProfileMenu = ref(false)
+
+  //En funktion för att man ska kunna klicka på profil knappen för att få fram menun på mobil
+  function toggleProfileMenu() {
+    showProfileMenu.value = true
+  }
+
+  function closeProfileMenu(event) {
+    if (!event.target.closest(".profile-container")) {
+      showProfileMenu.value = false
+    }
+  }
 
   if (getSessionStorage("loggedin")) {
     showHomeButton.value = true
@@ -69,7 +79,7 @@
       </router-link>
     </div>
     <div v-if="isLoggedIn" class="profile-container">
-      <i v-if="(showProfile = true)" id="user" class="fa fa-user" />
+      <i id="user" class="fa fa-user" />
       <ul class="user-menu">
         <!--La in en v-if som kollar om routern är för en elev och då visas
       profilknappen för elven-->
@@ -93,11 +103,6 @@
         </router-link>
       </ul>
     </div>
-
-    <div @click="showSettings = true">
-      <i id="settings" class="fa fa-cog" />
-      <UserSettings :is-open="showSettings" @close="showSettings = false" />
-    </div>
   </nav>
 </template>
 <style scoped>
@@ -115,18 +120,6 @@
     );
     height: 50px;
     align-items: center;
-  }
-
-  #settings {
-    font-size: 1.7em;
-    margin-right: 0.6em;
-    margin-left: 0.45em;
-    color: #fcfbfb;
-  }
-
-  #settings:hover {
-    color: #141313;
-    cursor: pointer;
   }
 
   #home {
@@ -147,7 +140,8 @@
   #user {
     font-size: 1.87em;
     color: #fcfbfb;
-    margin-left: 0.45em;
+    margin-left: 0.55em;
+    margin-right: 1.2em;
   }
 
   #user:hover {
@@ -162,7 +156,7 @@
     background-color: #cc79ff;
     position: absolute;
     top: 100%;
-    left: 50%;
+    left: 2%;
     transform: translateX(-50%);
     min-width: 160px;
     z-index: 1;
@@ -185,5 +179,11 @@
   .profile-container:hover .user-menu {
     visibility: visible;
     opacity: 1;
+  }
+
+  @media (max-width: 580px) {
+    #user {
+      margin-right: 1.4em;
+    }
   }
 </style>
