@@ -40,10 +40,7 @@
     quizzes.value.push(
       course.quizzes.filter((obj) => {
         console.log(quiz)
-        console.log(obj.id === quiz)
-        console.log(quizzes.value)
-        console.log(course.quizzes)
-        return true
+        return obj.id === quiz.id
       })[0]
     )
   })
@@ -59,28 +56,35 @@
     return currentCourse ? currentCourse.name : "Kursen Hittades Inte"
   }
 
-  const data = getLocalStorage("statistics").filter((obj) => {
-    return obj.courseid === route.params.courseid
-  })
+  // const data = getLocalStorage("statistics").filter((obj) => {
+  //   return obj.courseid === route.params.courseid
+  // })
 
-  console.log(data)
-  console.log(data[0].try)
-  console.log(data[0].answers)
-  console.log(data[1].try)
-  console.log(data[1].answers)
+  // console.log(data)
+  // console.log(data[0].try)
+  // console.log(data[0].answers)
+  // console.log(data[1].try)
+  // console.log(data[1].answers)
 </script>
 <template>
   <h1>Statistik för {{ getCourseName() }}</h1>
   <h2>Elever</h2>
   <ul>
     <li v-for="(student, index) in students" :key="index">
-      {{ student.name }}
+      <router-link
+        :to="`/teacher/${route.params.userid}/course/${course.id}/${student.id}/studentstatistics`"
+      >
+        {{ student.name }}
+      </router-link>
     </li>
   </ul>
   <h3>Quiz</h3>
   <ul>
     <li v-for="(quiz, index) in quizzes" :key="index">
-      {{ quiz.title }}
+      <router-link
+        :to="`/teacher/${route.params.userid}/course/${course.id}/quiz/${quiz.id}/quizstatistics`"
+        >{{ quiz.title }}</router-link
+      >
     </li>
   </ul>
 </template>
