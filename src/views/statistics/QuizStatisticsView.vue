@@ -45,14 +45,22 @@
   </div>
 </template>
 <style scoped>
-  @media (min-width: 581px) {
+  .back {
+    margin-top: 10px;
+    padding: 10px 20px;
+    font-size: 1rem;
+    border: none;
+    background: linear-gradient(45deg, #6a11cb, #2575fc);
+    color: white;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.3s ease-in-out;
+    box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.2);
   }
 
   @media (max-width: 580px) {
     h1 {
       font-size: 1.8rem;
-    }
-    .back {
     }
   }
 </style>
