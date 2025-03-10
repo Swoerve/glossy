@@ -68,9 +68,10 @@
 </script>
 <template>
   <h1>Statistik för {{ getCourseName() }}</h1>
-  <h2>Elever</h2>
-  <ul>
-    <li v-for="(student, index) in students" :key="index">
+  <h2 class="heading">Elever</h2>
+  <h2 class="heading">Quiz</h2>
+  <ul class="student-list">
+    <li class="student" v-for="(student, index) in students" :key="index">
       <router-link
         :to="`/teacher/${route.params.userid}/course/${course.id}/${student.id}/studentstatistics`"
       >
@@ -78,9 +79,9 @@
       </router-link>
     </li>
   </ul>
-  <h3>Quiz</h3>
-  <ul>
-    <li v-for="(quiz, index) in quizzes" :key="index">
+
+  <ul class="quiz-list">
+    <li class="quiz" v-for="(quiz, index) in quizzes" :key="index">
       <router-link
         :to="`/teacher/${route.params.userid}/course/${course.id}/quiz/${quiz.id}/quizstatistics`"
         >{{ quiz.title }}</router-link
@@ -88,3 +89,72 @@
     </li>
   </ul>
 </template>
+<style scoped>
+  * {
+    text-align: center;
+  }
+  h1 {
+    font-size: 2rem;
+    font-weight: bold;
+    margin-bottom: 20px;
+    color: #333333;
+  }
+
+  .heading {
+    font-size: 1.5rem;
+    font-weight: bold;
+    margin-top: 20px;
+    color: #222222;
+  }
+
+  /* Lista-styling */
+  .student-list,
+  .quiz-list {
+    list-style: none;
+    padding: 0;
+  }
+
+  .student,
+  .quiz {
+    background: #f7f2f84d;
+    margin: 10px auto;
+    padding: 10px;
+    border-radius: 10px;
+    transition: all 0.3s ease-in-out;
+    width: 80%;
+  }
+
+  a {
+    text-decoration: none;
+    color: #032429;
+    font-weight: bold;
+  }
+
+  @media (min-width: 581px) {
+    .student:hover,
+    .quiz:hover {
+      background: #ffffff99;
+      transform: scale(1.05);
+    }
+
+    a:hover {
+      color: #ff6600;
+    }
+  }
+
+  @media (max-width: 580px) {
+    h1 {
+      font-size: 1.8rem;
+    }
+
+    .heading {
+      font-size: 1.3rem;
+    }
+
+    .student,
+    .quiz {
+      width: 95%;
+      padding: 15px;
+    }
+  }
+</style>
