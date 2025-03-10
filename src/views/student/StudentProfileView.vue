@@ -42,6 +42,7 @@
 </script>
 
 <template>
+  <div id="app">
   <h1>{{ student.name }}s profil</h1>
   <div id="picture-container">
     <img
@@ -105,35 +106,106 @@
       <button @click="showPasswordModal = false">Avbryt</button>
     </div>
   </div>
+</div>
 </template>
 
 <style scoped>
-  h1 {
-    font-size: 3em;
-  }
+body {
+  font-family: Arial, sans-serif;
+  background-color: #f9f9f9;
+  color: #333;
+  margin: 0;
+  padding: 0;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
 
-  .picture-container {
-    width: 150px;
-  }
 
-  .image--cover {
-    width: 150px;
-    height: 180px;
-  }
+#app {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  background-color: #ffffff;
+  border-radius: 12px;
+  width: 100%;
+  max-width: 400px;
+  margin: auto;
+  margin-top: 20px;
+}
 
-  .modal {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.5);
-  }
 
-  .modal-content {
-    background-color: white;
-    padding: 20px;
-    margin: auto;
-    margin-top: calc(50vh - 100px);
-  }
+h1 {
+  font-size: 24px;
+  color: #222;
+  margin-bottom: 20px;
+}
+
+
+#picture-container {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 20px;
+}
+
+.image-cover {
+  width: 150px;
+  height: 150px;
+  object-fit: cover;
+  border-radius: 50%;
+  border: 3px solid #ddd;
+
+}
+
+button,
+.Button {
+  background-color: #007bff;
+  color: white;
+  border: none;
+  padding: 10px 16px;
+  margin: 5px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  font-size: 16px;
+}
+
+button:hover,
+.Button:hover {
+  background-color: #0056b3;
+}
+
+
+.modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.6);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 999;
+}
+
+.modal-content {
+  background-color: white;
+  padding: 20px;
+  border-radius: 12px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  width: 90%;
+  max-width: 400px;
+  text-align: center;
+}
+
+
+.modal h2 {
+  font-size: 20px;
+  margin-bottom: 16px;
+}
 </style>
