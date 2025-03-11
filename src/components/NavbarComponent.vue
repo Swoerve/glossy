@@ -184,6 +184,11 @@
   @media (max-width: 580px) {
     #user {
       margin-right: 1.4em;
+      font-size: 2.2em;
+    }
+
+    #home {
+      font-size: 2.2em;
     }
   }
 </style>
