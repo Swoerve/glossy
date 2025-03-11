@@ -41,7 +41,7 @@
   </div>
 
   <div>
-    <p>Totala försök:{{ quizData.try }}</p>
+    <p>Totala inlämningar:{{ quizData.length }}</p>
   </div>
 </template>
 <style scoped>
