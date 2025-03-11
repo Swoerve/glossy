@@ -17,20 +17,14 @@
     return obj.id === route.params.courseid
   })[0]
 
-  if (course) {
-    foundQuiz.value = course.quizzes.filter(
-      (quiz) => quiz.id === route.params.quizid
-    )
-    if (foundQuiz.value !== null) {
-      quizzes.value = foundQuiz
-      console.log(foundQuiz)
-    }
-  }
+  quiz.value = course.quizzes.filter((obj) => {
+    return obj.id === route.params.quizid
+  })[0]
 
   console.log(quizData)
 </script>
 <template>
-  <h1>Statitik på {{ quiz?.title || "Okänt quiz" }}</h1>
+  <h1>Statistik på {{ quiz.title }}</h1>
   <router-link
     :to="`/teacher/${route.params.userid}/course/${route.params.courseid}/coursestatistics`"
   >
